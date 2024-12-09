@@ -40,4 +40,35 @@ MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   5332.0 avail Mem
 
 ### (3) Penjelasan Output untuk Command `top` :
 
+#### 1. System Information :
+#### (Informasi Sistem)
 
+```
+top - 15:30:12 up 10 days, 3:45, 3 users, load average: 0.12, 0.05, 0.01
+```
+
+[-] Waktu :
+```
+15:30:12
+```
+menunjukkan Waktu saat ini
+<br/> <br/>
+
+[-] Uptime :
+```
+up 10 days, 3:45
+```
+menunjukkan bahwa System telah berjalan selama :
+- 10 hari
+- 3 jam
+- 45 menit
+<br/> <br/>
+
+[-] Users :  <br/>
+ada 3 User (pengguna) yang sedang Login di System. <br/><br/>
+
+
+[-] Load Average : 
+```
+load average: 0.12, 0.05, 0.01
+```
