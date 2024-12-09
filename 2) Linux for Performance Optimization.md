@@ -38,3 +38,6 @@ MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   5332.0 avail Mem
 
 ```
 
+#### (3) Penjelasan Output untuk Command `top` :
+
+
