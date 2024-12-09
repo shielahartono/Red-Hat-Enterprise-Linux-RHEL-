@@ -16,7 +16,7 @@ top
 ```
 Setelah itu, kita akan melihat output yang terus diperbarui secara otomatis, yang menunjukkan proses yang sedang berjalan di sistem kita.
 
-#### (2) Contoh Output pada Command `top` :
+#### (2) Contoh Output untuk Command `top` :
 ```
 top - 15:30:12 up 10 days,  3:45,  3 users,  load average: 0.12, 0.05, 0.01
 Tasks: 182 total,   1 running, 181 sleeping,   0 stopped,   0 zombie
