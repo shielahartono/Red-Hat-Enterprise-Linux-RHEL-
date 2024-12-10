@@ -72,6 +72,19 @@ ada 3 User (pengguna) yang sedang Login di System. <br/><br/>
 ```
 load average: 0.12, 0.05, 0.01
 ```
+-> "Load Average" adalah angka yang menunjukkan rata-rata jumlah proses yang sedang aktif atau menunggu untuk diproses oleh CPU dalam waktu tertentu, <br/>
+yaitu biasanya 1 menit terakhir, 5 menit terakhir, dan 15 menit terakhir. <br/>
 
-.....
-.....
+-> Pada contoh diatas, dapat kita ketahui :
+- Pada "1 menit" terakhir  ->  nilai "Load Average" adalah 0.12
+- Pada "5 menit" terakhir  ->  nilai "Load Average" adalah 0.05
+- Pada "15 menit" terakhir  ->  nilai "Load Average" adalah 0.01
+
+-> Nilai load average dihitung berdasarkan jumlah proses yang "sedang berjalan" (running) atau Jumlah Proses yang sedang "menunggu giliran" untuk diproses oleh CPU. <br/>
+
+-> Jika sistem memiliki lebih banyak proses daripada jumlah CPU, proses-proses itu harus mengantri untuk diproses, sehingga nilai load average akan meningkat. <br/>
+
+-> Contoh :
+- `0.12` : berarti rata-rata hanya 0.12 proses aktif dalam 1 menit terakhir. Karena angka ini jauh di bawah 1, maka CPU tidak sibuk (hampir idle).
+- `1.00` : berarti CPU bekerja penuh, dengan rata-rata 1 proses aktif setiap saat.
+- `2.00` : berarti rata-rata ada 2 proses aktif, tetapi hanya 1 yang bisa diproses, sementara yang lain menunggu.
