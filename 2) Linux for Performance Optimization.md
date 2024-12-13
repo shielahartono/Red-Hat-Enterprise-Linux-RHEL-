@@ -4,19 +4,19 @@ Berikut ini Penggnaan Linux untuk "Performance Optimization" dan Cara meng-anali
 
 # A. Analyze System Resource Usage and Identify Performance Bottlenecks related to CPU, Memory, disk I/O, and Network Usage
  (Meng-analisa penggunaan "System Resource" dan Identifikasi Kendala Kinerja yang berhubungan dengan CPU, Memory, Disk I/O, dan Network Usage )
-
-## 1. `top` :
-### Menggunakan Command Linux `top`
+----
+# 1. `top` :
+## Menggunakan Command Linux `top`
 
 Command `top` menunjukkan informasi real-time tentang penggunaan CPU, memori, proses yang berjalan.
 
-### (1) Jalankan Command `top` :
+## (1) Jalankan Command `top` :
 ```
 top
 ```
 Setelah itu, kita akan melihat output yang terus diperbarui secara otomatis, yang menunjukkan proses yang sedang berjalan di sistem kita.
 
-### (2) Contoh Output untuk Command `top` :
+## (2) Contoh Output untuk Command `top` :
 ```
 top - 15:30:12 up 10 days,  3:45,  3 users,  load average: 0.12, 0.05, 0.01
 Tasks: 182 total,   1 running, 181 sleeping,   0 stopped,   0 zombie
@@ -38,10 +38,10 @@ MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   5332.0 avail Mem
 
 ```
 
-### (3) Penjelasan Output untuk Command `top` :
+## (3) Penjelasan Output untuk Command `top` :
 
-#### A. System Information :
-#### (Informasi Sistem)
+### A. System Information :
+### (Informasi Sistem)
 
 ```
 top - 15:30:12 up 10 days, 3:45, 3 users, load average: 0.12, 0.05, 0.01
@@ -100,8 +100,21 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 - **Load average** yang lebih besar dari jumlah CPU fisik menunjukkan bottleneck dan kemungkinan penurunan kinerja karena CPU tidak dapat menangani banyak proses secara bersamaan.
 
 
-#### B. Statistik CPU :
+### B. Statistik CPU :
 ```
 %Cpu(s):  5.2 us,  3.4 sy,  0.0 ni, 91.1 id,  0.2 wa,  0.0 hi,  0.0 si,  0.0 st
 
 ```
+-> Penjelasan Secara Garis besar (Overview) :
+
+- `us` (user): Persentase waktu CPU yang digunakan oleh aplikasi pengguna (5.2%).
+- `sy` (system): Persentase waktu CPU yang digunakan oleh proses sistem (3.4%).
+- `ni` (nice): Persentase waktu CPU yang digunakan oleh proses dengan prioritas modifikasi (0%).
+- `id` (idle): Persentase waktu CPU yang tidak digunakan (91.1%). Angka ini menunjukkan bahwa CPU tidak sibuk.
+- `wa` (wait): Waktu CPU yang sedang menunggu operasi I/O (0.2%). Ini bisa mengindikasikan adanya masalah pada disk atau jaringan.
+- `hi` , `si` , `st` : Ini adalah kategori CPU lainnya, tetapi tidak sering digunakan.
+
+<br/> <br/>
+
+-> Penjelasan Detail :
+
