@@ -94,3 +94,7 @@ yaitu biasanya 1 menit terakhir, 5 menit terakhir, dan 15 menit terakhir. <br/>
 
 -> Misalnya, Jika sistem Anda memiliki 4 CPU, maka load average yang ideal adalah di bawah 4. Misalnya, jika load average Anda adalah 2, itu berarti bahwa rata-rata ada 2 proses yang sedang menunggu atau menggunakan CPU pada saat yang bersamaan. Sistem masih cukup mampu menangani lebih banyak proses tanpa masalah. <br/>
 Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini berarti sistem Anda terlalu sibuk dan proses-proses akan mulai menunggu lebih lama untuk mendapatkan waktu CPU, yang dapat menyebabkan penurunan kinerja.
+
+-> **Kesimpulan : **
+- **Load average** yang lebih kecil dari jumlah CPU fisik berarti sistem Anda cukup longgar dan dapat menangani lebih banyak pekerjaan tanpa masalah.
+- **Load average** yang lebih besar dari jumlah CPU fisik menunjukkan bottleneck dan kemungkinan penurunan kinerja karena CPU tidak dapat menangani banyak proses secara bersamaan.
