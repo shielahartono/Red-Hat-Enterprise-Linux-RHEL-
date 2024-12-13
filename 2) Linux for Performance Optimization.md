@@ -72,6 +72,8 @@ ada 3 User (pengguna) yang sedang Login di System. <br/><br/>
 ```
 load average: 0.12, 0.05, 0.01
 ```
+-> Load average adalah ukuran seberapa sibuk sistem tersebut, dan semakin tinggi angkanya, semakin banyak proses yang antri untuk mendapatkan waktu CPU. <br/>
+
 -> "Load Average" adalah angka yang menunjukkan rata-rata jumlah proses yang sedang aktif atau menunggu untuk diproses oleh CPU dalam waktu tertentu, <br/>
 yaitu biasanya 1 menit terakhir, 5 menit terakhir, dan 15 menit terakhir. <br/>
 
