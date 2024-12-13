@@ -90,3 +90,7 @@ yaitu biasanya 1 menit terakhir, 5 menit terakhir, dan 15 menit terakhir. <br/>
 - `0.12` : berarti rata-rata hanya 0.12 proses aktif dalam 1 menit terakhir. Karena angka ini jauh di bawah 1, maka CPU tidak sibuk (hampir idle).
 - `1.00` : berarti CPU bekerja penuh, dengan rata-rata 1 proses aktif setiap saat.
 - `2.00` : berarti rata-rata ada 2 proses aktif, tetapi hanya 1 yang bisa diproses, sementara yang lain menunggu.
+
+
+-> Misalnya, Jika sistem Anda memiliki 4 CPU, maka load average yang ideal adalah di bawah 4. Misalnya, jika load average Anda adalah 2, itu berarti bahwa rata-rata ada 2 proses yang sedang menunggu atau menggunakan CPU pada saat yang bersamaan. Sistem masih cukup mampu menangani lebih banyak proses tanpa masalah. <br/><br/>
+Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini berarti sistem Anda terlalu sibuk dan proses-proses akan mulai menunggu lebih lama untuk mendapatkan waktu CPU, yang dapat menyebabkan penurunan kinerja.
