@@ -40,7 +40,7 @@ MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   5332.0 avail Mem
 
 ### (3) Penjelasan Output untuk Command `top` :
 
-#### 1. System Information :
+#### A. System Information :
 #### (Informasi Sistem)
 
 ```
@@ -98,3 +98,10 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 -> Kesimpulan :
 - **Load average** yang lebih kecil dari jumlah CPU fisik berarti sistem Anda cukup longgar dan dapat menangani lebih banyak pekerjaan tanpa masalah.
 - **Load average** yang lebih besar dari jumlah CPU fisik menunjukkan bottleneck dan kemungkinan penurunan kinerja karena CPU tidak dapat menangani banyak proses secara bersamaan.
+
+
+#### B. Statistik CPU :
+```
+%Cpu(s):  5.2 us,  3.4 sy,  0.0 ni, 91.1 id,  0.2 wa,  0.0 hi,  0.0 si,  0.0 st
+
+```
