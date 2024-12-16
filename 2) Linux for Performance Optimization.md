@@ -314,17 +314,89 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> 
 >> Dengan pengaturan default, proses semacam ini tidak akan mempengaruhi pengalaman pengguna yang sedang berinteraksi langsung dengan komputer.
 >>
->>  
-#### **4. `id` (idle) - Waktu Menganggur (Tidak Digunakan)**  
-- **Apa itu?**  
-   Ini adalah **persentase waktu CPU yang tidak digunakan**. Artinya CPU sedang santai dan tidak sibuk.
-
-- **Penjelasan Sederhana:**  
-   Kalau angka ini tinggi, artinya CPU Anda **banyak waktu luang**, dan sistem tidak terbebani.
-
-- **Contoh:**  
-   Jika `id = 80%`, berarti **80% dari CPU** tidak digunakan sama sekali. Ini biasanya tanda bahwa sistem dalam kondisi normal dan tidak ada banyak proses berjalan.
-
+>>  --------
+>> 
+>> 
+>> 
+>> ### Apa itu `nice`?
+>> 
+>> **`nice`** adalah perintah di Linux yang digunakan untuk mengatur prioritas suatu proses. Semakin "tinggi" nilai nice, semakin **rendah** prioritas proses tersebut. Sebaliknya, semakin **rendah** nilai nice, semakin **tinggi** prioritasnya. 
+>> 
+>> ### Menggunakan `nice -n`
+>> 
+>> Sintaks perintah `nice` adalah seperti ini:
+>> 
+>> ```
+>> nice -n <nilai> <perintah>
+>> ```
+>> 
+>> Di sini:
+>> - **`-n <nilai>`** mengatur tingkat prioritas.
+>> - Nilai bisa berupa angka positif atau negatif.
+>> 
+>> ### 1. **`nice -n 10`** - **Prioritas Lebih Rendah**
+>> 
+>> Jika Anda menjalankan perintah seperti ini:
+>> 
+>> ```
+>> nice -n 10 <perintah>
+>> ```
+>> 
+>> Maka proses yang dijalankan dengan perintah tersebut akan memiliki **prioritas lebih rendah** dibandingkan dengan proses lain yang >> berjalan tanpa pengaturan `nice` (nilai nice standar = 0). 
+>> 
+>> **Penjelasan:**
+>> - **Nilai `10`** berarti proses ini akan diberi prioritas rendah. Sistem operasi akan mencoba memberikan waktu CPU untuk proses yang lebih penting terlebih dahulu, dan hanya memberi proses ini waktu CPU jika tidak ada proses lain yang lebih penting.
+>> - Biasanya, Anda memberikan prioritas rendah untuk proses yang tidak mendesak, seperti pengunduhan file besar, pencadangan data, atau operasi latar belakang.
+>> 
+>> Contoh:
+>> 
+>> ```
+>> nice -n 10 tar -cvf backup.tar /home/user/
+>> ```
+>> 
+>> Perintah di atas akan menjalankan proses pencadangan (backup) dengan prioritas lebih rendah, sehingga tidak mengganggu proses lain >> yang lebih penting.
+>> 
+>> ### 2. **`nice -n -10`** - **Prioritas Lebih Tinggi**
+>> 
+>> Jika Anda menjalankan perintah seperti ini:
+>> 
+>> ```
+>> nice -n -10 <perintah>
+>> ```
+>> 
+>> Maka proses tersebut akan memiliki **prioritas lebih tinggi** dibandingkan dengan proses lain yang berjalan dengan nilai nice standar (0).
+>> 
+>> **Penjelasan:**
+>> - **Nilai `-10`** berarti proses ini diberi prioritas yang lebih tinggi, sehingga sistem akan memberikan waktu CPU lebih banyak untuk proses ini, bahkan jika ada proses lain yang lebih biasa.
+>> - Biasanya, Anda memberi prioritas tinggi pada proses yang sangat penting atau yang memerlukan respons cepat, seperti menjalankan aplikasi yang mempengaruhi interaksi pengguna langsung.
+>> 
+>> Contoh:
+>> 
+>> ```
+>> nice -n -10 ./game
+>> ```
+>> 
+>> Perintah di atas akan menjalankan game dengan prioritas tinggi, sehingga game akan mendapatkan lebih banyak waktu CPU dibandingkan dengan proses lain yang berjalan di sistem.
+>> 
+>> ### Rangkuman:
+>> 
+>> - **`nice -n 10`**: Menjalankan proses dengan **prioritas rendah**. Proses ini akan dijalankan hanya jika tidak ada proses lain yang lebih penting.
+>> - **`nice -n -10`**: Menjalankan proses dengan **prioritas tinggi**. Proses ini akan mendapatkan lebih banyak waktu CPU, dan dijalankan lebih cepat dibandingkan proses lainnya yang memiliki prioritas rendah atau normal.
+>> 
+>> Jadi, intinya:
+>> - **Nilai positif (`10`)** = **prioritas rendah**.
+>> - **Nilai negatif (`-10`)** = **prioritas tinggi**.
+>> 
+>> #### **4. `id` (idle) - Waktu Menganggur (Tidak Digunakan)**  
+>> - **Apa itu?**  
+>>    Ini adalah **persentase waktu CPU yang tidak digunakan**. Artinya CPU sedang santai dan tidak sibuk.
+>> 
+>> - **Penjelasan Sederhana:**  
+>>    Kalau angka ini tinggi, artinya CPU Anda **banyak waktu luang**, dan sistem tidak terbebani.
+>> 
+>> - **Contoh:**  
+>>    Jika `id = 80%`, berarti **80% dari CPU** tidak digunakan sama sekali. Ini biasanya tanda bahwa sistem dalam kondisi normal dan >> tidak ada banyak proses berjalan.
+>> 
 
 
 #### **5. `wa` (I/O wait) - Waktu Menunggu Input/Output**  
@@ -337,6 +409,21 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 - **Contoh:**  
    Jika `wa = 10%`, itu artinya CPU menghabiskan **10% waktunya hanya untuk menunggu** hard disk atau perangkat lain menyelesaikan tugas.
 
+---------------------------------
+Contoh :
+```
+nice -n -7 ./game
+nice -n -6 tar -cvf backup.tar /home/user/
+```
+Perintah **`nice -n -7 ./game`** dan **`nice -n -6 tar -cvf backup.tar /home/user/`** keduanya menggunakan nilai **negative** untuk meningkatkan prioritas proses yang dijalankan. Namun, ada perbedaan antara nilai **-7** dan **-6**.
+
+- **`nice -n -7 ./game`** memberikan prioritas lebih tinggi dibandingkan **`nice -n -6 tar -cvf backup.tar /home/user/`** karena **nilai -7 lebih kecil** daripada **nilai -6**. Dalam konteks nilai nice, semakin kecil angka (semakin negatif), semakin tinggi prioritasnya.
+
+### Kesimpulan:
+- **`game`** akan lebih diprioritaskan dibandingkan **backup** karena nilai **`nice -n -7`** memberikan prioritas lebih tinggi daripada **`nice -n -6`**.
+
+
+  
 
 
 #### **6. `hi` (hardware interrupts) - Waktu Menangani Perangkat Keras**  
