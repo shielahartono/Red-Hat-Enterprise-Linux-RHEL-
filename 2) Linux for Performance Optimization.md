@@ -118,3 +118,120 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 
 -> Penjelasan Detail :
 
+
+
+#### **1. `us` (user) - Waktu untuk Aplikasi Pengguna**  
+- **Apa itu?**  
+   Ini adalah **persentase waktu CPU** yang digunakan oleh **aplikasi atau program** yang Anda jalankan.  
+   Contohnya, membuka browser, memutar video, atau menjalankan program pengolah kata.
+
+- **Penjelasan Sederhana:**  
+   Kalau angka ini tinggi, berarti CPU Anda sibuk menjalankan **program-program yang Anda buka sendiri**.
+
+- **Contoh:**  
+   Jika `us = 10%`, artinya **10% dari kekuatan CPU** digunakan untuk program yang Anda jalankan.
+
+
+#### **2. `sy` (system) - Waktu untuk Sistem**  
+- **Apa itu?**  
+   Ini adalah **persentase waktu CPU** yang digunakan untuk **proses sistem atau kernel**. Kernel adalah inti dari sistem operasi yang mengatur semua aktivitas komputer.
+
+- **Penjelasan Sederhana:**  
+   Kalau angka ini naik, berarti CPU sedang sibuk mengurus pekerjaan **internal sistem**, seperti membaca file, mengelola memori, atau melakukan operasi di latar belakang.
+
+- **Contoh:**  
+   Jika `sy = 15%`, itu artinya **15% dari CPU** digunakan untuk menjalankan tugas-tugas sistem.
+
+
+#### **3. `ni` (nice) - Waktu untuk Proses Prioritas Rendah**  
+- **Apa itu?**  
+   Ini adalah **persentase waktu CPU** yang digunakan untuk proses dengan **prioritas rendah**. Prioritas bisa diatur dengan perintah "nice" di Linux.
+
+- **Penjelasan Sederhana:**  
+   Jika ada program yang tidak mendesak (misalnya download file besar), kita bisa atur prioritasnya jadi rendah agar tidak mengganggu program lain. CPU akan mengerjakan ini **jika ada waktu luang**.
+
+- **Contoh:**  
+   Jika `ni = 2%`, artinya **2% dari CPU** digunakan untuk program dengan prioritas rendah.
+
+
+
+#### **4. `id` (idle) - Waktu Menganggur (Tidak Digunakan)**  
+- **Apa itu?**  
+   Ini adalah **persentase waktu CPU yang tidak digunakan**. Artinya CPU sedang santai dan tidak sibuk.
+
+- **Penjelasan Sederhana:**  
+   Kalau angka ini tinggi, artinya CPU Anda **banyak waktu luang**, dan sistem tidak terbebani.
+
+- **Contoh:**  
+   Jika `id = 80%`, berarti **80% dari CPU** tidak digunakan sama sekali. Ini biasanya tanda bahwa sistem dalam kondisi normal dan tidak ada banyak proses berjalan.
+
+
+
+#### **5. `wa` (I/O wait) - Waktu Menunggu Input/Output**  
+- **Apa itu?**  
+   Ini adalah **persentase waktu CPU** yang dihabiskan untuk **menunggu perangkat I/O** seperti **hard disk atau jaringan** selesai membaca/menulis data.
+
+- **Penjelasan Sederhana:**  
+   Kalau angka ini tinggi, CPU sedang menunggu perangkat keras yang lambat, seperti hard disk yang butuh waktu lama untuk memproses data.
+
+- **Contoh:**  
+   Jika `wa = 10%`, itu artinya CPU menghabiskan **10% waktunya hanya untuk menunggu** hard disk atau perangkat lain menyelesaikan tugas.
+
+
+
+#### **6. `hi` (hardware interrupts) - Waktu Menangani Perangkat Keras**  
+- **Apa itu?**  
+   Ini adalah **persentase waktu CPU** yang digunakan untuk menangani **interrupt hardware**. Contohnya ketika keyboard ditekan atau mouse digerakkan.
+
+- **Penjelasan Sederhana:**  
+   CPU harus merespons sinyal dari perangkat keras. Biasanya, ini hanya memakan waktu sedikit.
+
+- **Contoh:**  
+   Jika `hi = 1%`, artinya **1% dari CPU** digunakan untuk menangani sinyal dari perangkat keras.
+
+
+#### **7. `si` (software interrupts) - Waktu Menangani Perangkat Lunak**  
+- **Apa itu?**  
+   Ini adalah **persentase waktu CPU** yang digunakan untuk menangani **interrupt dari software**. Software interrupt terjadi ketika aplikasi meminta CPU untuk segera melakukan sesuatu.
+
+- **Penjelasan Sederhana:**  
+   Kalau angka ini tinggi, mungkin ada aplikasi yang sering memanggil CPU untuk menangani tugas tertentu.
+
+- **Contoh:**  
+   Jika `si = 0.5%`, berarti **0.5% dari CPU** digunakan untuk menangani permintaan dari aplikasi.
+
+
+
+#### **8. `st` (steal) - Waktu CPU yang Dipakai Mesin Virtual**  
+- **Apa itu?**  
+   Ini adalah **persentase waktu CPU** yang digunakan oleh mesin virtual atau hypervisor. Ini terjadi jika Anda menjalankan sistem operasi di dalam mesin virtual (VM).
+
+- **Penjelasan Sederhana:**  
+   Kalau angka ini tinggi, itu berarti CPU "dicuri" oleh mesin virtual dan tidak bisa digunakan oleh sistem utama.
+
+- **Contoh:**  
+   Jika `st = 5%`, artinya **5% dari CPU** digunakan oleh mesin virtual.
+
+
+
+## **Ringkasan Mudah:**
+| Statistik | Arti Sederhana | Jika Angka Tinggi |
+|-----------|----------------|------------------|
+| **`us`** | CPU sibuk menjalankan aplikasi Anda | Terlalu banyak aplikasi berat |
+| **`sy`** | CPU sibuk menjalankan tugas sistem | Sistem sibuk mengelola proses internal |
+| **`ni`** | CPU menjalankan program prioritas rendah | Ada proses prioritas rendah berjalan |
+| **`id`** | CPU tidak sibuk (idle) | Sistem santai, CPU punya banyak waktu luang |
+| **`wa`** | CPU menunggu perangkat I/O | Perangkat keras (disk/jaringan) lambat |
+| **`hi`** | CPU menangani sinyal perangkat keras | Perangkat keras mungkin bermasalah |
+| **`si`** | CPU menangani sinyal perangkat lunak | Aplikasi sering meminta CPU |
+| **`st`** | CPU digunakan oleh mesin virtual | CPU "dipakai" oleh mesin virtualisasi |
+
+
+
+Dengan memahami angka-angka ini, Anda bisa mendiagnosis **kenapa CPU bekerja lambat atau sibuk**. Misalnya:  
+- Kalau **`us`** tinggi → Banyak program pengguna yang berat.  
+- Kalau **`sy`** tinggi → Sistem sibuk.  
+- Kalau **`wa`** tinggi → Ada masalah I/O (disk atau jaringan lambat).  
+- Kalau **`id`** rendah → CPU sedang **sangat sibuk**.
+
+Harapannya penjelasan ini membuatnya **lebih mudah dipahami**! Jika ada bagian yang ingin diperjelas lagi, beri tahu saya. 😊
