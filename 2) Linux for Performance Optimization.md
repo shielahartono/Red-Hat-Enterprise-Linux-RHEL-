@@ -1042,8 +1042,41 @@ Jika Anda menjalankan beberapa mesin virtual di server atau laptop yang sama, me
 >> ### Kesimpulan:
 >> Isolasi mesin virtual adalah konsep yang memungkinkan setiap mesin virtual berjalan secara terpisah dan mandiri meskipun mereka berbagi perangkat keras fisik yang sama. Ini memberikan keuntungan dalam hal keamanan, kinerja, dan pengelolaan sumber daya. Hypervisor memainkan peran penting dalam menjaga isolasi ini, memastikan bahwa satu VM tidak bisa mengakses atau mempengaruhi VM lainnya.
 >> 
+>> ----------------
+>> ## Jika beberapa VM berbagi Resource Hardware yang sama di atas Hypervisor, apakah mereka dapat mengakses data satu sam lain ?
 >> 
-
+>> **meskipun beberapa Virtual Machine (VM) berbagi Resource Hardware yang sama di atas hypervisor**, mereka **tidak dapat langsung mengakses data satu sama lain**. Hypervisor bertanggung jawab untuk memastikan **isolasi** antar VM, yang berarti bahwa data atau aplikasi yang dijalankan di satu VM tidak dapat diakses atau dipengaruhi oleh VM lain secara langsung.
+>> 
+>> ### Penjelasan Mengenai Isolasi dalam Virtualisasi:
+>> 
+>> 1. **Isolasi Sumber Daya**:
+>>    - **CPU, RAM, Penyimpanan, dan Jaringan**: Meskipun beberapa VM berjalan di atas perangkat keras fisik yang sama dan berbagi sumber daya seperti CPU, RAM, dan penyimpanan, hypervisor bertugas untuk mengelola pembagian sumber daya tersebut dengan cara yang tidak memungkinkan satu VM untuk mengakses memori atau data dari VM lain. Setiap VM menjalankan **sistem operasi dan aplikasi sendiri**, yang terisolasi dari VM lainnya.
+>>    
+>>    - **Contoh**: Jika VM pertama menggunakan 2 GB RAM dan VM kedua menggunakan 4 GB RAM, masing-masing VM memiliki ruang memori sendiri yang **terisolasi**. Hypervisor memastikan bahwa meskipun mereka berbagi fisik memori, masing-masing VM hanya dapat mengakses **bagian RAM yang dialokasikan** untuknya. Jika VM pertama mencoba mengakses memori VM kedua, hal itu tidak akan diizinkan.
+>> 
+>> 2. **Virtualisasi di Tingkat Software**:
+>>    - Hypervisor bertindak sebagai lapisan antara **hardware fisik** dan **VM**. Ia mengelola sumber daya dan memastikan bahwa setiap VM berjalan dengan cara yang terisolasi dari satu sama lain.
+>>    
+>>    - **Sistem Operasi Tamu (Guest OS)** yang berjalan di setiap VM memiliki **kernel dan memori virtual** yang tidak dapat diakses oleh sistem operasi lain (di VM lain). Setiap VM bertindak seolah-olah ia memiliki sistem fisik sendiri, meskipun pada kenyataannya, ia berbagi perangkat keras fisik dengan VM lainnya.
+>> 
+>> 3. **Keamanan dan Akses Data**:
+>>    - **Isolasi Keamanan**: Untuk alasan keamanan, hypervisor menggunakan **teknik isolasi virtual** untuk memastikan bahwa satu VM tidak dapat membaca atau mengubah data VM lain tanpa izin. Ini memastikan bahwa aplikasi atau data yang dijalankan di VM pertama tidak dapat dipengaruhi oleh aplikasi atau data di VM kedua, kecuali ada **kerentanannya** atau **kesalahan konfigurasi** yang membiarkan akses tersebut.
+>>    
+>>    - **Sistem I/O dan Penyimpanan**: Penyimpanan juga diisolasi. Setiap VM dapat memiliki **disk virtual** yang terkait dengan penyimpanan fisik yang sebenarnya, tetapi data yang disimpan dalam disk virtual hanya dapat diakses oleh VM yang memilikinya, kecuali jika ada pengaturan tertentu yang memungkinkan akses bersama (misalnya, shared storage atau berbagi file secara eksplisit).
+>> 
+>> 4. **Hypervisor dan Pengaturan Jaringan**:
+>>    - **Isolasi Jaringan**: VM juga dapat memiliki **jaringan virtual** yang diatur oleh hypervisor. Jaringan virtual ini memastikan bahwa meskipun VM berbagi perangkat keras jaringan fisik yang sama, komunikasi antar VM tetap terpisah (kecuali jika secara eksplisit diatur untuk saling terhubung). Ini berarti VM pertama tidak bisa mendengarkan atau berinteraksi dengan lalu lintas jaringan VM kedua, kecuali jika diizinkan oleh pengaturan jaringan virtual.
+>> 
+>> ### Jadi, apakah VM bisa mengetahui data satu sama lain?
+>> Secara **default** dan **normal**, **tidak bisa**. Hypervisor menjamin **isolasi penuh** antar VM untuk memastikan bahwa satu VM tidak dapat mengakses memori, penyimpanan, atau data lainnya dari VM lain tanpa izin eksplisit.
+>> 
+>> Namun, ada beberapa pengecualian atau situasi tertentu:
+>> - **Jika ada kesalahan konfigurasi atau kerentanan**, isolasi ini bisa terbuka. Misalnya, kesalahan dalam konfigurasi jaringan atau pengaturan pembagian penyimpanan dapat memungkinkan komunikasi antara VM yang seharusnya terisolasi.
+>> - **Jika berbagi data secara eksplisit diatur**, misalnya, dengan menggunakan **shared storage** atau **folder bersama**, maka data dapat diakses oleh beberapa VM sesuai izin yang diberikan.
+>> 
+>> Secara keseluruhan, prinsip utama dalam virtualisasi adalah **isolasi** antar VM, sehingga **data atau informasi yang berjalan di satu VM tidak dapat dilihat atau diubah oleh VM lain tanpa izin atau konfigurasi tertentu**.
+>>
+>> 
 ## **Ringkasan Mudah:**
 | Statistik | Arti Sederhana | Jika Angka Tinggi |
 |-----------|----------------|------------------|
