@@ -154,6 +154,8 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 
 
 #### **2. `sy` (system) - Waktu untuk Sistem**  
+- `sy` berarti "System"
+
 - **Apa itu?**  
    Ini adalah **persentase waktu CPU** yang digunakan untuk **proses sistem atau kernel**. Kernel adalah inti dari sistem operasi yang mengatur semua aktivitas komputer.
 
