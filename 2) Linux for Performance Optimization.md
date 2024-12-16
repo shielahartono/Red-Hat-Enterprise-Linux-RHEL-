@@ -572,7 +572,7 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 - **Nilai kecil** = normal, perangkat keras bekerja wajar.  
 - **Nilai besar** = perlu diperiksa, bisa jadi ada masalah dengan perangkat keras yang mengganggu CPU.
 
-Apakah penjelasan ini lebih mudah dipahami? 😊
+
 
 #### **7. `si` (software interrupts) - Waktu Menangani Perangkat Lunak**  
 - **Apa itu?**  
