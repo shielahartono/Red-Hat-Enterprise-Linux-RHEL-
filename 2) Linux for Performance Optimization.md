@@ -287,7 +287,7 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> Proses dengan prioritas rendah tidak memblokir atau menunggu selama proses penting berjalan. Jadi, ketika CPU sedang sibuk menangani aplikasi atau tugas penting, proses dengan prioritas rendah akan menunggu sampai CPU bebas. Namun, jika CPU sedang idle (tidak ada tugas penting), proses dengan prioritas rendah bisa dieksekusi.
 >>
 >>  -----
->> Secara default, tanpa pengaturan khusus, tugas-tugas yang tergolong **prioritas rendah** di sistem biasanya adalah tugas-tugas yang >> tidak membutuhkan respons cepat atau tidak mendesak. Sistem operasi akan memberi prioritas lebih tinggi kepada proses yang membutuhkan interaksi langsung dengan pengguna atau yang lebih penting untuk kinerja sistem.
+>> Secara default, tanpa pengaturan khusus, tugas-tugas yang tergolong **prioritas rendah** di sistem biasanya adalah tugas-tugas yang  tidak membutuhkan respons cepat atau tidak mendesak. Sistem operasi akan memberi prioritas lebih tinggi kepada proses yang membutuhkan interaksi langsung dengan pengguna atau yang lebih penting untuk kinerja sistem.
 >> 
 >> Beberapa contoh **tugas prioritas rendah** yang biasanya berjalan secara otomatis di sistem tanpa perlu pengaturan khusus adalah:
 >> 
