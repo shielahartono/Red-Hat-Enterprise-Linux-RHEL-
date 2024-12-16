@@ -285,8 +285,36 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> 
 >> ### **Bagaimana Proses Prioritas Rendah Bekerja?**
 >> Proses dengan prioritas rendah tidak memblokir atau menunggu selama proses penting berjalan. Jadi, ketika CPU sedang sibuk menangani aplikasi atau tugas penting, proses dengan prioritas rendah akan menunggu sampai CPU bebas. Namun, jika CPU sedang idle (tidak ada tugas penting), proses dengan prioritas rendah bisa dieksekusi.
+>>
+>>  -----
+>> Secara default, tanpa pengaturan khusus, tugas-tugas yang tergolong **prioritas rendah** di sistem biasanya adalah tugas-tugas yang >> tidak membutuhkan respons cepat atau tidak mendesak. Sistem operasi akan memberi prioritas lebih tinggi kepada proses yang membutuhkan interaksi langsung dengan pengguna atau yang lebih penting untuk kinerja sistem.
 >> 
-
+>> Beberapa contoh **tugas prioritas rendah** yang biasanya berjalan secara otomatis di sistem tanpa perlu pengaturan khusus adalah:
+>> 
+>> 1. **Proses Pencadangan (Backup)**:
+>>    - Proses pencadangan data yang berjalan secara terjadwal (misalnya, menggunakan `cron` di Linux). Backup ini membutuhkan waktu dan sumber daya, tetapi tidak perlu segera selesai, sehingga sering kali diberi prioritas rendah.
+>> 
+>> 2. **Download atau Pembaruan Otomatis**:
+>>    - Download file besar atau pembaruan perangkat lunak yang dijadwalkan (misalnya, menggunakan aplikasi seperti `apt` di Linux atau `Windows Update`). Meskipun penting, proses ini dapat berjalan di latar belakang dengan prioritas rendah agar tidak mengganggu penggunaan sistem.
+>> 
+>> 3. **Indeksasi File**:
+>>    - Proses yang dilakukan oleh aplikasi seperti mesin pencari (misalnya `tracker` di Linux atau `Spotlight` di macOS) untuk membuat indeks file agar pencarian menjadi lebih cepat. Ini bisa memakan waktu, tetapi tidak memerlukan respons cepat.
+>> 
+>> 4. **Pemeliharaan Sistem (Maintenance)**:
+>>    - Proses pemeliharaan seperti defragmentasi disk atau pembersihan file sampah yang terjadi secara berkala. Ini juga bisa berjalan dengan prioritas rendah karena proses ini tidak perlu segera selesai.
+>> 
+>> 5. **Proses Pengiriman atau Penerimaan Data di Latar Belakang**:
+>>    - Proses-proses seperti sinkronisasi data dengan cloud atau pengunduhan dan pengunggahan file besar melalui jaringan. Meskipun membutuhkan sumber daya, mereka biasanya tidak memerlukan prioritas tinggi dan dapat berjalan di latar belakang.
+>> 
+>> ### Bagaimana Sistem Menentukan Prioritas Proses?
+>> 
+>> Sistem operasi secara otomatis memberi prioritas rendah pada tugas-tugas yang tidak mendesak dengan cara mengatur **nilai "nice"**. >> Semakin tinggi nilai "nice", semakin rendah prioritasnya. Proses dengan prioritas rendah akan menunggu hingga CPU memiliki waktu luang untuk menyelesaikannya.
+>> 
+>> Misalnya, sebuah aplikasi unduhan yang berjalan di latar belakang mungkin memiliki nilai "nice" lebih tinggi (misalnya, +10), yang >> berarti CPU akan mengerjakan proses utama terlebih dahulu (seperti menjalankan aplikasi yang aktif) sebelum menjalankan unduhan.
+>> 
+>> Dengan pengaturan default, proses semacam ini tidak akan mempengaruhi pengalaman pengguna yang sedang berinteraksi langsung dengan komputer.
+>>
+>>  
 #### **4. `id` (idle) - Waktu Menganggur (Tidak Digunakan)**  
 - **Apa itu?**  
    Ini adalah **persentase waktu CPU yang tidak digunakan**. Artinya CPU sedang santai dan tidak sibuk.
