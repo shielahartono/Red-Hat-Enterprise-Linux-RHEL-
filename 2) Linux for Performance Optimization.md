@@ -1076,6 +1076,45 @@ Jika Anda menjalankan beberapa mesin virtual di server atau laptop yang sama, me
 >> 
 >> Secara keseluruhan, prinsip utama dalam virtualisasi adalah **isolasi** antar VM, sehingga **data atau informasi yang berjalan di satu VM tidak dapat dilihat atau diubah oleh VM lain tanpa izin atau konfigurasi tertentu**.
 >>
+>>  ----------------------
+>> ## *VM yang terinfeksi virus** tidak akan langsung **menyebar** atau **mempengaruhi VM lain** yang berbagi ** Resource Hardware yang sama
+>> 
+>> 
+>>  **VM yang terinfeksi virus** tidak akan langsung **menyebar** atau **mempengaruhi VM lain** yang berbagi **sumber daya perangkat keras** yang sama. Ini karena **hypervisor** yang mengelola virtualisasi menjamin **isolasi** antara satu VM dengan VM lainnya, termasuk **isolasi data** dan **aplikasi** yang dijalankan. Jadi, meskipun beberapa VM berbagi perangkat keras yang sama (seperti CPU, RAM, penyimpanan, dan jaringan), **setiap VM memiliki lingkungan yang terpisah** yang membuatnya aman dari infeksi yang terjadi pada VM lain.
+>> 
+>> ### Mengapa VM lain tetap aman?
+>> 
+>> 1. **Isolasi Lingkungan**:
+>>    - **Setiap VM** memiliki **sistem operasi dan aplikasi** yang berjalan secara independen dan terisolasi satu sama lain. Ini berarti bahwa malware yang menginfeksi VM pertama hanya dapat mempengaruhi **lingkungan sistem operasi** di dalam VM tersebut dan **tidak dapat langsung mempengaruhi sistem operasi atau aplikasi** di VM lain.
+>>    
+>> 2. **Isolasi Memori**:
+>>    - Setiap VM memiliki **memori virtual** yang dikelola oleh hypervisor. **Memori virtual** ini terisolasi, sehingga aplikasi atau malware yang berjalan dalam satu VM **tidak bisa mengakses memori dari VM lain**. Ini berarti data atau proses yang ada di satu VM tidak akan dapat **dilihat atau diubah** oleh VM lain, meskipun keduanya berbagi perangkat keras fisik yang sama.
+>> 
+>> 3. **Isolasi Penyimpanan**:
+>>    - Penyimpanan data di masing-masing VM biasanya terpisah dalam **disk virtual**. Disk virtual ini **tidak dapat diakses oleh VM lain** kecuali ada pengaturan berbagi secara eksplisit. Jadi, jika satu VM terinfeksi virus yang mencoba menyebar melalui penyimpanan, **VM lain yang terisolasi** tetap aman.
+>> 
+>> 4. **Keamanan Jaringan Terpisah**:
+>>    - Jaringan virtual yang digunakan oleh VM biasanya terisolasi. Meskipun VM berbagi perangkat keras jaringan fisik yang sama, **hypervisor mengelola jaringan virtual secara terpisah** untuk memastikan bahwa komunikasi antara VM yang berbeda tidak mudah terjadi kecuali diatur secara eksplisit. Jadi, meskipun malware di satu VM mencoba untuk mengirimkan data ke VM lain, **hypervisor** bisa memblokir atau membatasi akses tersebut.
+>> 
+>> ### Apa yang bisa terjadi jika malware mencoba untuk menyebar antar VM?
+>> 
+>> Meski hypervisor memberikan **isolasi yang kuat**, **beberapa faktor tertentu** dapat memungkinkan penyebaran malware antar VM:
+>> 
+>> 1. **Kerentanan pada Hypervisor**:
+>>    - Jika **hypervisor** itu sendiri memiliki **kerentanan keamanan** atau **bug**, malware di satu VM bisa mengeksploitasi kerentanannya untuk mendapatkan akses ke **VM lain** atau bahkan **ke perangkat keras fisik**. Kerentanan ini sangat jarang, tetapi jika ditemukan, bisa memungkinkan serangan >> lintas VM.
+>> 
+>> 2. **Shared Resources atau Penyimpanan Bersama**:
+>>    - Jika **disk virtual** atau **folder bersama** diatur untuk diakses oleh beberapa VM, dan salah satu VM terinfeksi malware, malware tersebut bisa mencoba **menyebarkan dirinya** melalui penyimpanan bersama. Namun, ini hanya terjadi jika pengaturan berbagi file atau penyimpanan eksplisit telah dilakukan.
+>> 
+>> 3. **Jaringan yang Tidak Terisolasi**:
+>>    - Jika **pengaturan jaringan** antara VM memungkinkan mereka untuk **berkomunikasi langsung**, malware di satu VM mungkin dapat mencoba untuk menyebar ke VM lain melalui jaringan virtual. Namun, ini juga bisa dicegah dengan konfigurasi keamanan jaringan yang tepat (misalnya, dengan menggunakan firewall virtual atau segmentasi jaringan).
+>> 
+>> ### Ringkasan: 
+>> - **Isolasi antara VM** yang disediakan oleh hypervisor membuat **infeksi virus di satu VM tidak memengaruhi VM lainnya**. Virus yang menyerang VM pertama hanya akan berdampak pada **sistem operasi dan aplikasi** di VM tersebut, bukan pada VM lain yang berjalan di mesin fisik yang sama.
+>> - Untuk memastikan keamanan yang maksimal, sangat penting untuk **menjaga hypervisor tetap aman** dan melakukan **pemantauan yang cermat** terhadap kerentanannya, serta menjaga **pengaturan jaringan dan penyimpanan** agar tetap aman dan terisolasi antar VM.
+>> 
+>> Jadi, selama tidak ada **kerentanannya** dalam **hypervisor** atau konfigurasi yang membiarkan akses tidak sah, **VM yang terinfeksi virus tidak akan menular ke VM lain**.
+>>
 >> 
 ## **Ringkasan Mudah:**
 | Statistik | Arti Sederhana | Jika Angka Tinggi |
