@@ -518,6 +518,61 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 - **Contoh:**  
    Jika `hi = 1%`, artinya **1% dari CPU** digunakan untuk menangani sinyal dari perangkat keras.
 
+>> ^For your Information^
+>> ## Hardware Interrupts 
+>> 
+>> **`hi` (hardware interrupts)** adalah tentang bagaimana CPU merespons **permintaan (interrupt)** dari perangkat keras. 
+>> 
+>> 
+>> 
+>> ### **Apa Itu Interrupt?**  
+>> Interrupt adalah **sinyal atau pemberitahuan** dari perangkat keras (seperti keyboard, mouse, atau perangkat jaringan) ke CPU untuk >> meminta perhatian. Perangkat keras "menyela" CPU agar tugas tertentu bisa diproses.
+>> 
+>> Bayangkan CPU seperti seseorang yang sedang bekerja (misalnya menulis dokumen), dan tiba-tiba ada **telepon berdering** (interrupt). Orang tersebut akan berhenti menulis sebentar untuk menjawab telepon (menangani interrupt), lalu kembali ke pekerjaan aslinya.
+>> 
+>> 
+>> ### **Apa Itu `hi` (Hardware Interrupts)?**  
+>> `hi` adalah **persentase waktu CPU** yang digunakan **khusus untuk menangani sinyal dari perangkat keras**. Sinyal ini bisa datang dari:
+>> - Keyboard (misalnya ketika Anda menekan tombol).
+>> - Mouse (misalnya saat Anda menggerakkan kursor).
+>> - Perangkat jaringan (misalnya saat ada paket data masuk).
+>> - Disk I/O (operasi baca/tulis dari hard disk atau SSD).
+>> - Perangkat keras lainnya (printer, USB, dll).
+>> 
+>> CPU harus berhenti sebentar dari tugas utamanya untuk **menangani sinyal tersebut**, menyelesaikan permintaan, lalu melanjutkan >> pekerjaannya.
+>> 
+>> 
+>> 
+>> ### **Penjelasan Sederhana**
+>> Ketika nilai **`hi`** terlihat di output sistem (misalnya **`hi = 1%`**), itu berarti **1% dari waktu CPU** digunakan untuk memproses **interrupt hardware**.
+>> 
+>> Biasanya, **nilai `hi` sangat kecil**, karena perangkat keras jarang memerlukan perhatian CPU dalam waktu lama. Kebanyakan perangkat keras hanya membutuhkan sedikit waktu CPU untuk memproses sinyal mereka.
+>> 
+>> ### **Contoh Sederhana**
+>> 1. Anda menekan tombol **keyboard**.  
+>>    - Keyboard mengirim **interrupt** ke CPU untuk memberi tahu bahwa ada tombol yang ditekan.  
+>>    - CPU **berhenti sebentar**, memproses sinyal dari keyboard, lalu kembali ke tugasnya semula.
+>> 
+>> 2. Anda menggerakkan **mouse**.
+>>    - Mouse mengirim sinyal ke CPU untuk memperbarui posisi kursor di layar.  
+>>    - CPU menangani permintaan itu sebentar,
+>> 
+>> lalu kembali bekerja menyelesaikan tugas-tugas lain.
+>> 
+
+
+### **Kenapa Ini Penting?**  
+- **Normal**: Nilai `hi` yang rendah (misalnya di bawah 1-2%) menunjukkan bahwa perangkat keras berjalan normal dan tidak membebani CPU.
+- **Tinggi**: Jika **`hi`** sangat tinggi (misalnya > 5%), itu bisa berarti ada **masalah dengan perangkat keras** atau ada terlalu banyak interrupt dari suatu perangkat (contoh: jaringan, disk, atau perangkat USB). Ini bisa menyebabkan CPU sibuk hanya untuk menangani interrupt, bukan menjalankan aplikasi utama.
+
+
+
+### **Kesimpulan**  
+**`hi`** (hardware interrupts) adalah waktu CPU yang digunakan untuk menangani **sinyal dari perangkat keras** seperti keyboard, mouse, atau jaringan.  
+- **Nilai kecil** = normal, perangkat keras bekerja wajar.  
+- **Nilai besar** = perlu diperiksa, bisa jadi ada masalah dengan perangkat keras yang mengganggu CPU.
+
+Apakah penjelasan ini lebih mudah dipahami? 😊
 
 #### **7. `si` (software interrupts) - Waktu Menangani Perangkat Lunak**  
 - **Apa itu?**  
