@@ -166,7 +166,9 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> ^For your Information^
 >> ## Proses Sistem atau Kernel :
 >> 
->>  **Proses Sistem atau Kernel** adalah tugas-tugas yang dijalankan oleh sistem operasi, khususnya oleh **kernel**, yang merupakan >> >> inti dari sistem operasi. Kernel bertugas mengatur bagaimana perangkat keras (seperti CPU, memori, dan perangkat I/O) berinteraksi >> dengan perangkat lunak (program dan aplikasi). 
+>>  **Proses Sistem atau Kernel** adalah tugas-tugas yang dijalankan oleh sistem operasi, khususnya oleh **kernel**, yang merupakan inti dari sistem operasi.
+>> <br/>  <br/>
+>> Kernel bertugas mengatur bagaimana Hardware (seperti CPU, memori, dan perangkat I/O) berinteraksi dengan Software (program dan aplikasi). 
 >> 
 >> Dengan kata lain, **kernel** berfungsi sebagai jembatan antara **perangkat keras** komputer dan **program-program** yang Anda jalankan.
 >> 
