@@ -121,15 +121,36 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 
 
 #### **1. `us` (user) - Waktu untuk Aplikasi Pengguna**  
+- `us` berarti "User"
+
 - **Apa itu?**  
-   Ini adalah **persentase waktu CPU** yang digunakan oleh **aplikasi atau program** yang Anda jalankan.  
+   Ini adalah **persentase waktu CPU** yang digunakan oleh **aplikasi atau program** yang User jalankan.  
    Contohnya, membuka browser, memutar video, atau menjalankan program pengolah kata.
 
 - **Penjelasan Sederhana:**  
-   Kalau angka ini tinggi, berarti CPU Anda sibuk menjalankan **program-program yang Anda buka sendiri**.
+   Kalau angka ini tinggi, berarti CPU Anda sibuk menjalankan **program-program yang Kita (User) buka sendiri**.
 
 - **Contoh:**  
    Jika `us = 10%`, artinya **10% dari kekuatan CPU** digunakan untuk program yang Anda jalankan.
+
+>> ^For your Information^
+>> ### Persentate Waktu CPU :
+>> ### (apa maksud "Persentate Waktu CPU")
+>> #### Contoh : <br/>
+>>  Jika `us = 10%` , artinya:  <br/>
+>> 10% dari waktu CPU digunakan untuk menjalankan program yang dibuka oleh User , seperti browser, Video Player, atau Text Editor. <br/>
+>> Jadi, dalam periode pengukuran (misalnya 1 detik), CPU menghabiskan 10% waktunya untuk memproses program pengguna. <br/>  <br/>
+>>
+>> #### Bagaimana CPU membagi waktu?
+>> Misalkan Anda memiliki CPU yang berjalan selama 1 detik: <br/>
+>> 10% us → 0,1 detik digunakan untuk program yang Anda jalankan sendiri. <br/>
+>> 3% sy (system) → 0,03 detik digunakan untuk proses sistem. <br/>
+>>  87% id (idle) → 0,87 detik CPU tidak bekerja karena tidak ada tugas tambahan. <br/> <br/>
+>>
+>> #### Mengapa dalam persentase?
+>> Mengukur dalam persentase memudahkan untuk mengetahui seberapa sibuk CPU dalam menangani tugas-tugasnya. <br/>
+>> Jika us tinggi, berarti CPU lebih sibuk menjalankan aplikasi Anda. <br/> 
+>> Jika id (idle) tinggi, berarti CPU sebagian besar sedang menganggur dan tidak memiliki banyak pekerjaan. <br/>
 
 
 #### **2. `sy` (system) - Waktu untuk Sistem**  
