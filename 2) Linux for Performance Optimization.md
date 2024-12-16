@@ -998,9 +998,51 @@ Jika Anda menjalankan beberapa mesin virtual di server atau laptop yang sama, me
 >> - Jika nilai **st** tinggi, kinerja aplikasi atau sistem Anda bisa menurun, dan Anda perlu memeriksa alokasi CPU, beban kerja mesin virtual lain, atau sumber daya server fisik.
 >> 
 >> Memahami steal time sangat penting untuk memecahkan masalah kinerja pada sistem yang berjalan di atas virtualisasi atau cloud, >> terutama ketika ada banyak mesin virtual yang saling berbagi sumber daya.
+>>
+>>  -------------------
+>> ## Isolasi pada Hypervisor :
+>> 
+>> **Isolasi Mesin Virtual (VM Isolation)** adalah konsep yang sangat penting dalam virtualisasi, terutama dalam konteks **hypervisor**. Isolasi ini berarti setiap **mesin virtual (VM)** berfungsi secara terpisah dan independen satu sama lain, meskipun mereka semua berjalan pada perangkat keras fisik yang sama. Ini seperti memberikan setiap mesin virtual ruang terpisah di dalam komputer yang sama, sehingga masing-masing merasa seolah-olah mereka berada di komputer yang terpisah, dengan sumber daya mereka sendiri.
+>> 
+>> ### Penjelasan Sederhana:
+>> 
+>> Bayangkan Anda sedang tinggal di sebuah rumah besar yang memiliki banyak kamar tidur. Masing-masing kamar tidur ini adalah **mesin virtual (VM)**. Meskipun semua kamar berada di rumah yang sama, setiap kamar memiliki **kunci sendiri** dan hanya orang yang memiliki kunci tersebut yang bisa masuk ke dalam kamar tersebut. Begitu juga dengan **VM**, meskipun mereka berada di satu mesin fisik yang sama (rumah besar), mereka berjalan secara independen, dan tidak saling memengaruhi satu sama lain.
+>> 
+>> ### Bagaimana Isolasi Bekerja di Hypervisor?
+>> 
+>> Hypervisor adalah perangkat lunak atau sistem yang mengelola mesin virtual. Isolasi dalam konteks hypervisor berarti setiap mesin virtual berfungsi secara terpisah dari mesin virtual lainnya. Hypervisor memastikan bahwa meskipun semua mesin virtual berbagi sumber daya perangkat keras yang sama (seperti CPU, memori, dan disk), mereka tidak bisa saling mengakses atau mengganggu satu sama lain. Ini adalah salah satu alasan mengapa **virtualisasi** sangat berguna untuk menjalankan beberapa sistem operasi atau aplikasi di satu mesin fisik.
+>> 
+>> Berikut adalah beberapa aspek **isolasi** yang diterapkan oleh hypervisor dalam konteks mesin virtual:
+>> 
+>> ### 1. **Sumber Daya Terpisah:**
+>> Setiap VM memiliki alokasi sumber daya yang ditetapkan, seperti CPU, RAM, dan penyimpanan. Meskipun mereka berbagi perangkat keras fisik yang sama, mereka tidak saling mencampuri sumber daya masing-masing. Misalnya, jika Anda memiliki dua VM di server yang sama, VM pertama mungkin menggunakan 2 GB RAM, sedangkan VM kedua menggunakan 4 GB RAM. Namun, keduanya tidak akan saling memengaruhi dalam penggunaan memori.
+>> 
+>> ### 2. **Keamanan yang Terpisah:**
+>> Isolasi juga membantu dalam hal **keamanan**. Jika satu VM terinfeksi oleh malware atau aplikasi yang tidak diinginkan, VM lain tetap aman dan tidak terpengaruh, karena mereka berjalan secara terpisah dalam lingkungan yang terisolasi. Ini mirip dengan sistem operasi yang terpisah pada komputer yang berbeda, di mana satu komputer yang terinfeksi tidak dapat merusak komputer lain.
+>> 
+>> ### 3. **Kinerja Terkontrol:**
+>> Hypervisor memberikan kontrol atas **pengalokasian sumber daya** untuk setiap VM. Anda bisa menentukan berapa banyak CPU, memori, dan sumber daya lainnya yang dapat digunakan oleh setiap mesin virtual. Jika satu VM membutuhkan lebih banyak sumber daya, hypervisor akan memastikan bahwa sumber daya tersebut diberikan tanpa mengganggu VM lainnya. Namun, jika ada terlalu banyak mesin virtual yang berjalan pada satu perangkat keras fisik, ini dapat menyebabkan **over-commitment** dan penurunan kinerja.
+>> 
+>> ### 4. **Jaringan Terpisah:**
+>> Setiap VM juga bisa diberi jaringan terisolasi. Ini berarti meskipun semua VM ada di server fisik yang sama, mereka bisa memiliki alamat IP mereka sendiri dan berfungsi seperti mesin yang terpisah di jaringan. Ini memberikan lapisan keamanan dan memungkinkan aplikasi di VM untuk beroperasi secara independen tanpa gangguan dari VM lainnya.
+>> 
+>> ### 5. **Penyimpanan Terisolasi:**
+>> Meskipun mesin virtual berbagi perangkat penyimpanan fisik (misalnya, disk keras atau SSD), penyimpanan untuk masing-masing VM bisa terisolasi dengan menggunakan **file sistem virtual**. Setiap VM menyimpan data mereka di dalam file virtual disk (seperti VMDK di VMware atau VDI di VirtualBox), yang menjaga data masing-masing VM tetap terpisah dan aman.
+>> 
+>> ### Keuntungan Isolasi Mesin Virtual:
+>> 1. **Keamanan yang Lebih Baik**: Dengan isolasi, serangan atau kerusakan yang terjadi pada satu VM tidak akan mempengaruhi VM lain, yang sangat penting untuk keamanan data dan aplikasi.
+>> 2. **Fleksibilitas dan Efisiensi**: Anda dapat menjalankan berbagai sistem operasi dan aplikasi pada mesin yang sama tanpa saling mengganggu.
+>> 3. **Pengelolaan Sumber Daya**: Anda dapat mengalokasikan sumber daya sesuai kebutuhan untuk setiap VM, sehingga memaksimalkan penggunaan perangkat keras.
+>> 
+>> ### Contoh Kasus:
+>> 1. **Virtualisasi Server**: Di sebuah pusat data, Anda bisa menjalankan banyak mesin virtual pada satu server fisik. Masing-masing VM bisa menjalankan sistem operasi yang berbeda, seperti Windows di satu VM dan Linux di VM lainnya, dan keduanya akan berfungsi seolah-olah mereka berjalan di server terpisah.
+>>    
+>> 2. **Layanan Cloud**: Di penyedia layanan cloud seperti AWS atau Azure, Anda bisa menjalankan banyak VM di server fisik yang sama. Setiap pelanggan memiliki VM mereka sendiri yang terisolasi dan tidak bisa mengakses VM pelanggan lain.
+>> 
+>> ### Kesimpulan:
+>> Isolasi mesin virtual adalah konsep yang memungkinkan setiap mesin virtual berjalan secara terpisah dan mandiri meskipun mereka berbagi perangkat keras fisik yang sama. Ini memberikan keuntungan dalam hal keamanan, kinerja, dan pengelolaan sumber daya. Hypervisor memainkan peran penting dalam menjaga isolasi ini, memastikan bahwa satu VM tidak bisa mengakses atau mempengaruhi VM lainnya.
 >> 
 >> 
-
 
 ## **Ringkasan Mudah:**
 | Statistik | Arti Sederhana | Jika Angka Tinggi |
