@@ -834,7 +834,7 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> 
 >> -------------
 >> ## **Hypervisor**  
->> **Hypervisor** adalah perangkat lunak atau firmware yang memungkinkan Anda menjalankan **mesin virtual (VM)** di atas satu perangkat keras fisik.  
+>> **Hypervisor** adalah perangkat lunak atau firmware yang memungkinkan Anda menjalankan **mesin virtual (VM)** di atas satu Physical Hardware.  
 >> 
 >> Bayangkan **hypervisor** sebagai **manajer** yang mengatur penggunaan **sumber daya perangkat keras** (seperti CPU, RAM, disk) di antara beberapa mesin virtual yang berjalan di satu komputer atau server.  
 >> 
