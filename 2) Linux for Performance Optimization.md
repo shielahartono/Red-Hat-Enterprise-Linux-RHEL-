@@ -386,18 +386,32 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> Jadi, intinya:
 >> - **Nilai positif (`10`)** = **prioritas rendah**.
 >> - **Nilai negatif (`-10`)** = **prioritas tinggi**.
+>>
+>> ---------------------------------
+>> Contoh :
+>> ```
+>> nice -n -7 ./game
+>> nice -n -6 tar -cvf backup.tar /home/user/
+>> ```
+>> Perintah **`nice -n -7 ./game`** dan **`nice -n -6 tar -cvf backup.tar /home/user/`** keduanya menggunakan nilai **negative** untuk >> meningkatkan prioritas proses yang dijalankan. Namun, ada perbedaan antara nilai **-7** dan **-6**.
 >> 
- #### **4. `id` (idle) - Waktu Menganggur (Tidak Digunakan)**  
- - **Apa itu?**  
-    Ini adalah **persentase waktu CPU yang tidak digunakan**. Artinya CPU sedang santai dan tidak sibuk.
- 
- - **Penjelasan Sederhana:**  
-    Kalau angka ini tinggi, artinya CPU Anda **banyak waktu luang**, dan sistem tidak terbebani.
- 
- - **Contoh:**  
-    Jika `id = 80%`, berarti **80% dari CPU** tidak digunakan sama sekali. Ini biasanya tanda bahwa sistem dalam kondisi normal dan >> tidak ada banyak proses berjalan.
- 
-
+>> - **`nice -n -7 ./game`** memberikan prioritas lebih tinggi dibandingkan **`nice -n -6 tar -cvf backup.tar /home/user/`** karena **nilai -7 lebih kecil** daripada **nilai -6**. Dalam konteks nilai nice, semakin kecil angka (semakin negatif), semakin tinggi prioritasnya.
+>> 
+>> ### Kesimpulan:
+>> - **`game`** akan lebih diprioritaskan dibandingkan **backup** karena nilai **`nice -n -7`** memberikan prioritas lebih tinggi daripada **`nice -n -6`**.
+>> 
+>> 
+>>  #### **4. `id` (idle) - Waktu Menganggur (Tidak Digunakan)**  
+>>  - **Apa itu?**  
+>>    Ini adalah **persentase waktu CPU yang tidak digunakan**. Artinya CPU sedang santai dan tidak sibuk.
+>>  
+>>  - **Penjelasan Sederhana:**  
+>>     Kalau angka ini tinggi, artinya CPU Anda **banyak waktu luang**, dan sistem tidak terbebani.
+>>  
+>>  - **Contoh:**  
+>>     Jika `id = 80%`, berarti **80% dari CPU** tidak digunakan sama sekali. Ini biasanya tanda bahwa sistem dalam kondisi normal dan  tidak ada banyak proses berjalan.
+>>  
+>> 
 
 #### **5. `wa` (I/O wait) - Waktu Menunggu Input/Output**  
 - **Apa itu?**  
@@ -409,18 +423,6 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 - **Contoh:**  
    Jika `wa = 10%`, itu artinya CPU menghabiskan **10% waktunya hanya untuk menunggu** hard disk atau perangkat lain menyelesaikan tugas.
 
----------------------------------
-Contoh :
-```
-nice -n -7 ./game
-nice -n -6 tar -cvf backup.tar /home/user/
-```
-Perintah **`nice -n -7 ./game`** dan **`nice -n -6 tar -cvf backup.tar /home/user/`** keduanya menggunakan nilai **negative** untuk meningkatkan prioritas proses yang dijalankan. Namun, ada perbedaan antara nilai **-7** dan **-6**.
-
-- **`nice -n -7 ./game`** memberikan prioritas lebih tinggi dibandingkan **`nice -n -6 tar -cvf backup.tar /home/user/`** karena **nilai -7 lebih kecil** daripada **nilai -6**. Dalam konteks nilai nice, semakin kecil angka (semakin negatif), semakin tinggi prioritasnya.
-
-### Kesimpulan:
-- **`game`** akan lebih diprioritaskan dibandingkan **backup** karena nilai **`nice -n -7`** memberikan prioritas lebih tinggi daripada **`nice -n -6`**.
 
 
   
