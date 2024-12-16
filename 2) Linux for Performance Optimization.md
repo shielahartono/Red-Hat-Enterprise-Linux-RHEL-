@@ -401,17 +401,17 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> - **`game`** akan lebih diprioritaskan dibandingkan **backup** karena nilai **`nice -n -7`** memberikan prioritas lebih tinggi daripada **`nice -n -6`**.
 >> 
 >> 
->>  #### **4. `id` (idle) - Waktu Menganggur (Tidak Digunakan)**  
->>  - **Apa itu?**  
->>    Ini adalah **persentase waktu CPU yang tidak digunakan**. Artinya CPU sedang santai dan tidak sibuk.
->>  
->>  - **Penjelasan Sederhana:**  
->>     Kalau angka ini tinggi, artinya CPU Anda **banyak waktu luang**, dan sistem tidak terbebani.
->>  
->>  - **Contoh:**  
->>     Jika `id = 80%`, berarti **80% dari CPU** tidak digunakan sama sekali. Ini biasanya tanda bahwa sistem dalam kondisi normal dan  tidak ada banyak proses berjalan.
->>  
->> 
+  #### **4. `id` (idle) - Waktu Menganggur (Tidak Digunakan)**  
+  - **Apa itu?**  
+    Ini adalah **persentase waktu CPU yang tidak digunakan**. Artinya CPU sedang santai dan tidak sibuk.
+  
+  - **Penjelasan Sederhana:**  
+     Kalau angka ini tinggi, artinya CPU Anda **banyak waktu luang**, dan sistem tidak terbebani.
+  
+  - **Contoh:**  
+     Jika `id = 80%`, berarti **80% dari CPU** tidak digunakan sama sekali. Ini biasanya tanda bahwa sistem dalam kondisi normal dan  tidak ada banyak proses berjalan.
+  
+
 
 #### **5. `wa` (I/O wait) - Waktu Menunggu Input/Output**  
 - **Apa itu?**  
