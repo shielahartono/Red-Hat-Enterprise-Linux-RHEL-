@@ -754,16 +754,16 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> Dengan software interrupt, CPU bisa merespons permintaan tersebut lebih cepat, sehingga sistem berjalan **lebih efisien** dan aplikasi dapat berjalan dengan lancar.  
 >> 
 >> 
->>  #### **8. `st` (steal) - Waktu CPU yang Dipakai Mesin Virtual**  
->>  - **Apa itu?**  
->>     Ini adalah **persentase waktu CPU** yang digunakan oleh mesin virtual atau hypervisor. Ini terjadi jika Anda menjalankan sistem  operasi di dalam mesin virtual (VM).
->>  
->>  - **Penjelasan Sederhana:**  
->>     Kalau angka ini tinggi, itu berarti CPU "dicuri" oleh mesin virtual dan tidak bisa digunakan oleh sistem utama.
->>  
->>  - **Contoh:**  
->>     Jika `st = 5%`, artinya **5% dari CPU** digunakan oleh mesin virtual.
->> 
+  #### **8. `st` (steal) - Waktu CPU yang Dipakai Mesin Virtual**  
+  - **Apa itu?**  
+    Ini adalah **persentase waktu CPU** yang digunakan oleh mesin virtual atau hypervisor. Ini terjadi jika Anda menjalankan sistem  operasi di dalam mesin virtual (VM).
+  
+  - **Penjelasan Sederhana:**  
+     Kalau angka ini tinggi, itu berarti CPU "dicuri" oleh mesin virtual dan tidak bisa digunakan oleh sistem utama.
+  
+  - **Contoh:**  
+     Jika `st = 5%`, artinya **5% dari CPU** digunakan oleh mesin virtual.
+ 
 >> ^For your Information^
 >> 
 >> ## ** `st` (steal) dalam Penggunaan CPU?**  
