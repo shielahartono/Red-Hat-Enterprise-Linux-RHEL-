@@ -258,7 +258,34 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 - **Contoh:**  
    Jika `ni = 2%`, artinya **2% dari CPU** digunakan untuk program dengan prioritas rendah.
 
-
+>> ^for your information^
+>>
+>> **Proses Prioritas Rendah** merujuk pada proses yang tidak memerlukan banyak perhatian dari CPU atau proses yang tidak mendesak untuk segera diselesaikan. 
+>> 
+>> ### Penjelasan Sederhana:
+>> - **Prioritas Rendah** berarti proses tersebut bisa dijalankan ketika CPU tidak sibuk mengerjakan tugas-tugas yang lebih penting.
+>> - CPU akan memberi **waktu** untuk proses dengan prioritas rendah hanya ketika tidak ada proses penting yang perlu dijalankan.
+>> - Ini menghindari gangguan pada aplikasi atau proses yang lebih penting (misalnya, program yang Anda gunakan saat itu).
+>> - Di Linux, Anda bisa mengatur prioritas proses menggunakan perintah `nice`, yang memberi tahu sistem seberapa penting atau tidak penting sebuah proses dibandingkan dengan proses lain yang berjalan.
+>> 
+>> ### Contoh Proses Prioritas Rendah:
+>> 1. **Download File Besar**:
+>>    - Misalnya, Anda sedang mendownload file besar menggunakan browser atau aplikasi download. Proses ini tidak terlalu mendesak, jadi Anda dapat memberi prioritas rendah padanya supaya tidak mengganggu pekerjaan lain yang Anda lakukan di komputer.
+>>    
+>> 2. **Backup Data**:
+>>    - Jika Anda sedang melakukan backup data di latar belakang, ini adalah proses yang bisa diberi prioritas rendah, karena tidak mempengaruhi penggunaan aplikasi lain secara langsung.
+>>    
+>> 3. **Proses Pembersihan Disk**:
+>>    - Membersihkan file sampah atau log di komputer biasanya juga bisa dilakukan dengan prioritas rendah, karena itu bukan tugas yang harus diselesaikan segera.
+>>    
+>> ### **Bagaimana Prioritas Rendah Diberikan?**
+>> Di Linux, kita bisa mengubah prioritas suatu proses dengan menggunakan perintah `nice`. Semakin tinggi nilai **nice**, semakin rendah prioritasnya. Contoh:
+>> - Jika Anda menjalankan perintah dengan `nice -n 10`, itu berarti proses tersebut akan memiliki prioritas lebih rendah daripada proses lainnya yang berjalan dengan nilai nice standar (biasanya 0).
+>> - Sebaliknya, jika Anda ingin memberikan prioritas lebih tinggi, Anda bisa menggunakan nilai negative, misalnya `nice -n -10`.
+>> 
+>> ### **Bagaimana Proses Prioritas Rendah Bekerja?**
+>> Proses dengan prioritas rendah tidak memblokir atau menunggu selama proses penting berjalan. Jadi, ketika CPU sedang sibuk menangani aplikasi atau tugas penting, proses dengan prioritas rendah akan menunggu sampai CPU bebas. Namun, jika CPU sedang idle (tidak ada tugas penting), proses dengan prioritas rendah bisa dieksekusi.
+>> 
 
 #### **4. `id` (idle) - Waktu Menganggur (Tidak Digunakan)**  
 - **Apa itu?**  
