@@ -754,18 +754,252 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> Dengan software interrupt, CPU bisa merespons permintaan tersebut lebih cepat, sehingga sistem berjalan **lebih efisien** dan aplikasi dapat berjalan dengan lancar.  
 >> 
 >> 
-
-
- #### **8. `st` (steal) - Waktu CPU yang Dipakai Mesin Virtual**  
- - **Apa itu?**  
-    Ini adalah **persentase waktu CPU** yang digunakan oleh mesin virtual atau hypervisor. Ini terjadi jika Anda menjalankan sistem >> operasi di dalam mesin virtual (VM).
- 
- - **Penjelasan Sederhana:**  
-    Kalau angka ini tinggi, itu berarti CPU "dicuri" oleh mesin virtual dan tidak bisa digunakan oleh sistem utama.
- 
- - **Contoh:**  
-    Jika `st = 5%`, artinya **5% dari CPU** digunakan oleh mesin virtual.
- 
+>>  #### **8. `st` (steal) - Waktu CPU yang Dipakai Mesin Virtual**  
+>>  - **Apa itu?**  
+>>     Ini adalah **persentase waktu CPU** yang digunakan oleh mesin virtual atau hypervisor. Ini terjadi jika Anda menjalankan sistem  operasi di dalam mesin virtual (VM).
+>>  
+>>  - **Penjelasan Sederhana:**  
+>>     Kalau angka ini tinggi, itu berarti CPU "dicuri" oleh mesin virtual dan tidak bisa digunakan oleh sistem utama.
+>>  
+>>  - **Contoh:**  
+>>     Jika `st = 5%`, artinya **5% dari CPU** digunakan oleh mesin virtual.
+>> 
+>> ^For your Information^
+>> 
+>> ## ** `st` (steal) dalam Penggunaan CPU?**  
+>> `st` atau **steal time** adalah waktu CPU yang diambil (atau "dicuri") oleh mesin virtual atau hypervisor dari mesin utama atau mesin virtual Anda. 
+>> 
+>> Steal time ini **hanya terjadi di lingkungan virtualisasi**, seperti:  
+>> - Mesin virtual (VM) di **VirtualBox**, **VMware**, atau **KVM**.  
+>> - Server berbasis cloud seperti **AWS EC2**, **Google Cloud**, atau **Azure**.  
+>> 
+>> 
+>> ### **Penjelasan Sederhana:**  
+>> Bayangkan Anda berada di dalam sebuah **ruangan kelas** bersama teman-teman Anda, dan Anda semua harus berbagi satu **buku**. Dalam hal ini:  
+>> - **CPU** adalah buku yang dipakai bersama.  
+>> - Anda dan teman-teman Anda adalah **mesin virtual (VM)** yang membutuhkan CPU.  
+>> - **Guru** adalah **hypervisor**, yaitu perangkat lunak yang mengatur pembagian buku ke setiap VM.
+>> 
+>> Jika guru memberikan buku (CPU) ke **teman Anda** terlebih dahulu, maka Anda harus **menunggu giliran**. Nah, waktu ketika Anda **menunggu** itu disebut **steal time (st)**. Ini berarti CPU yang seharusnya digunakan oleh Anda (VM Anda) malah digunakan oleh mesin virtual lain.
+>> 
+>> 
+>> 
+>> ### **Contoh Kasus di Dunia Nyata**  
+>> 1. **Mesin Virtual di Laptop atau Server**:  
+>>    - Jika Anda menjalankan **dua mesin virtual** pada satu laptop atau server.  
+>>    - Jika **VM A** menggunakan banyak CPU, **VM B** akan melihat nilai **st** meningkat karena CPU "dicuri" untuk VM A.  
+>> 
+>> 2. **Layanan Cloud**:  
+>>    - Jika Anda menggunakan layanan cloud seperti **AWS** dengan shared CPU (CPU berbagi dengan pengguna lain).  
+>>    - Jika pengguna lain memonopoli CPU, Anda akan melihat nilai **st** naik, dan VM Anda menjadi lambat.  
+>> 
+>> 
+>> ### **Cara Membaca `st` di Output `top`**  
+>> Jika Anda menjalankan perintah `top` di dalam mesin virtual, Anda akan melihat sesuatu seperti ini:  
+>> ```
+>> %Cpu(s):  5.2 us,  3.4 sy,  0.0 ni, 91.1 id,  0.2 wa,  0.0 hi,  0.0 si,  0.1 st
+>> ```
+>> - **st = 0.1%** berarti 0.1% waktu CPU "dicuri" oleh hypervisor atau mesin virtual lain.  
+>> - **st = 10%** berarti 10% dari CPU Anda digunakan oleh mesin virtual lain.  
+>> - Ini bisa menyebabkan **penurunan kinerja** pada mesin virtual Anda.  
+>> 
+>> 
+>> 
+>> ### **Penyebab `st` (steal time) Tinggi**  
+>> 1. **CPU Overload**: Terlalu banyak mesin virtual berjalan pada satu CPU fisik (oversubscription).  
+>> 2. **Hypervisor Memprioritaskan VM Lain**: Hypervisor memberikan CPU ke VM lain yang membutuhkan lebih banyak waktu.  
+>> 3. **Shared CPU di Cloud**: Jika Anda menggunakan layanan cloud berbasis shared resources, CPU Anda harus bersaing dengan pengguna lain.  
+>> 4. **Proses Berat**: Ada proses atau aplikasi di VM lain yang menggunakan banyak CPU.  
+>> 
+>> 
+>> ### **Dampak `st` Tinggi**  
+>> Jika nilai **`st`** terlalu tinggi:  
+>> - **Kinerja lambat**: Aplikasi atau proses di mesin virtual menjadi lebih lambat.  
+>> - **Respons buruk**: Sistem menjadi tidak responsif karena CPU tidak tersedia.  
+>> - **Delay atau waktu tunggu**: Proses yang memerlukan CPU harus menunggu lebih lama.  
+>> 
+>> 
+>> ### **Cara Mengatasi `st` Tinggi**  
+>> 1. **Kurangi Beban CPU**: Hentikan atau optimalkan proses berat di mesin virtual lain.  
+>> 2. **Tambahkan CPU Core**: Berikan lebih banyak vCPU (CPU virtual) ke server fisik Anda.  
+>> 3. **Gunakan Dedicated CPU**: Jika menggunakan layanan cloud, pilih instance dengan CPU dedicated (tidak berbagi).  
+>> 4. **Sebar Beban Kerja**: Pindahkan sebagian VM ke server lain agar CPU tidak terlalu sibuk.  
+>> 5. **Monitoring CPU**: Gunakan alat seperti `top`, `sar`, atau `vmstat` untuk memantau steal time.
+>> 
+>> 
+>> ### **Kesimpulan Singkat**  
+>> - **`st` (steal)** adalah waktu CPU yang digunakan oleh **VM lain** atau hypervisor, sehingga tidak tersedia untuk mesin virtual Anda.  
+>> - Jika `st` tinggi, itu artinya **CPU Anda sedang berebutan** dengan mesin virtual lain atau server terlalu sibuk.  
+>> - Solusinya adalah mengurangi beban CPU, menambahkan sumber daya CPU, atau menggunakan layanan dengan CPU dedicated.
+>> 
+>> -------------
+>> ## **Hypervisor**  
+>> **Hypervisor** adalah perangkat lunak atau firmware yang memungkinkan Anda menjalankan **mesin virtual (VM)** di atas satu perangkat keras fisik.  
+>> 
+>> Bayangkan **hypervisor** sebagai **manajer** yang mengatur penggunaan **sumber daya perangkat keras** (seperti CPU, RAM, disk) di antara beberapa mesin virtual yang berjalan di satu komputer atau server.  
+>> 
+>> 
+>> 
+>> ### **Penjelasan Sederhana**  
+>> Anggaplah Anda memiliki satu **komputer fisik** (misalnya, server besar).  
+>> - Dengan **hypervisor**, Anda bisa membagi komputer tersebut menjadi **beberapa mesin virtual (VM)**.  
+>> - Setiap mesin virtual bertindak seperti **komputer independen**, dengan sistem operasinya sendiri (misalnya Windows, Linux, atau Mac).  
+>> - Hypervisor memastikan bahwa **CPU, RAM, disk, dan jaringan** dibagi secara adil antara mesin virtual.
+>> 
+>> Contoh Situasi:  
+>> - Jika Anda memiliki server dengan **64 GB RAM** dan **8 core CPU**, Anda bisa membuat:  
+>>   - **VM 1**: 2 core CPU, 16 GB RAM  
+>>   - **VM 2**: 4 core CPU, 32 GB RAM  
+>>   - **VM 3**: 2 core CPU, 16 GB RAM  
+>> 
+>> Hypervisor adalah yang memastikan setiap VM mendapatkan sumber daya sesuai pengaturan.
+>> 
+>> 
+>> ### **Mengapa Hypervisor Penting?**  
+>> 1. **Efisiensi**:  
+>>    - Dengan hypervisor, satu komputer fisik bisa digunakan untuk **banyak VM** sekaligus. Ini membuat penggunaan perangkat keras lebih efisien.  
+>> 2. **Hemat Biaya**:  
+>>    - Tidak perlu membeli banyak server fisik. Cukup satu server fisik dengan banyak VM di dalamnya.  
+>> 3. **Pengelolaan yang Mudah**:  
+>>    - Anda bisa menyalakan, mematikan, atau mengatur mesin virtual sesuai kebutuhan, tanpa harus merusak server fisik.  
+>> 4. **Lingkungan Terisolasi**:  
+>>    - Setiap VM berjalan terpisah dari yang lain, sehingga masalah di satu VM tidak memengaruhi VM lain.  
+>> 
+>> 
+>> ### **Jenis-Jenis Hypervisor**  
+>> 
+>> Hypervisor dibagi menjadi **2 jenis**:  
+>> 
+>> #### 1. **Type 1: Bare-Metal Hypervisor**  
+>> - Hypervisor ini langsung dijalankan di atas **perangkat keras fisik** tanpa sistem operasi (OS) tambahan.  
+>> - Lebih cepat dan efisien karena langsung berinteraksi dengan perangkat keras.  
+>> - **Contoh**:  
+>> - **VMware ESXi**  
+>> - **Microsoft Hyper-V**  
+>> - **Xen**  
+>> - **KVM (Kernel-based Virtual Machine)**  
+>> 
+>> **Analogi**:  
+>> Bayangkan Anda punya satu rumah kosong (perangkat keras). Anda langsung membangun ruangan (mesin virtual) di dalam rumah itu tanpa tambahan apa pun.
+>> 
+>> 
+>> 
+>> #### 2. **Type 2: Hosted Hypervisor**  
+>> - Hypervisor ini dijalankan **di atas sistem operasi** yang sudah ada (seperti Windows atau Linux).  
+>> - Lebih mudah digunakan tetapi sedikit lebih lambat dibandingkan **Type 1** karena harus melalui OS terlebih dahulu.  
+>> - **Contoh**:  
+>>   - **Oracle VirtualBox**  
+>>   - **VMware Workstation**  
+>>   - **Parallels Desktop**  
+>> 
+>> **Analogi**:  
+>> Bayangkan Anda punya rumah yang sudah penuh dengan furnitur (sistem operasi). Anda menambahkan ruangan tambahan (mesin virtual) di dalamnya.
+>> 
+>> 
+>> ### **Cara Kerja Hypervisor**  
+>> 1. **Mengatur Sumber Daya**:  
+>>    - Hypervisor mengambil sumber daya perangkat keras (CPU, RAM, disk) dan membaginya ke setiap mesin virtual.  
+>> 2. **Isolasi Mesin Virtual**:  
+>>    - Setiap VM berjalan sendiri-sendiri, seolah-olah berada di komputer yang terpisah.  
+>> 3. **Mengelola Proses**:  
+>>    - Hypervisor menangani permintaan dari setiap VM dan mengalokasikan CPU, RAM, atau disk sesuai kebutuhan.  
+>> 
+>> **Contoh Kasus**:  
+>> Jika **VM A** membutuhkan CPU tambahan, hypervisor akan memutuskan apakah CPU tersebut tersedia dan memberikannya ke VM A. Jika **VM B** tiba-tiba menggunakan banyak memori, hypervisor memastikan memori tambahan diberikan sesuai batasan yang sudah ditentukan.
+>> 
+>> 
+>> 
+>> ### **Contoh Penggunaan Hypervisor di Kehidupan Nyata**  
+>> 1. **Server di Perusahaan**:  
+>>    - Sebuah server fisik digunakan untuk menjalankan banyak **VM** yang melayani tugas berbeda (database, aplikasi web, dan email).  
+>> 2. **Layanan Cloud**:  
+>>    - Penyedia cloud seperti **AWS, Google Cloud, dan Azure** menggunakan hypervisor untuk membuat banyak VM yang bisa disewakan ke pelanggan.  
+>> 3. **Pengembangan dan Testing Aplikasi**:  
+>>    - Para developer menggunakan **VirtualBox** atau **VMware Workstation** untuk menjalankan beberapa sistem operasi (Windows, Linux) di satu komputer.  
+>> 4. **Penggunaan Desktop Virtual (VDI)**:  
+   - Di kantor, komputer Anda mungkin sebenarnya adalah **mesin virtual** yang dijalankan di server pusat menggunakan hypervisor.
+>> 
+>> ### **Keuntungan Menggunakan Hypervisor**  
+>> 1. **Menghemat Biaya**: Tidak perlu membeli banyak server fisik.  
+>> 2. **Mengurangi Downtime**: Jika satu VM bermasalah, bisa dipindahkan ke server lain.  
+>> 3. **Skalabilitas**: Mudah menambahkan VM baru jika diperlukan.  
+>> 4. **Keamanan**: Setiap VM terisolasi, sehingga masalah di satu VM tidak menyebar ke VM lain.  
+>> 5. **Pengelolaan Sederhana**: Anda bisa mengontrol semua VM dari satu hypervisor.  
+>> 
+>> 
+>> ### **Kesimpulan Singkat**  
+>> - **Hypervisor** adalah perangkat lunak yang memungkinkan Anda menjalankan banyak **mesin virtual (VM)** di satu perangkat keras >> fisik.  
+>> - Ada **2 jenis hypervisor**: **Type 1 (langsung di hardware)** dan **Type 2 (di atas sistem operasi)**.  
+>> - Hypervisor sangat berguna untuk **server**, **cloud computing**, dan **pengembangan aplikasi**, karena hemat biaya, fleksibel, >> dan mudah dikelola.  
+>> 
+>> ----------------
+>> ## Penyebab Steal Time yang Tinggi
+>> **Steal Time (st)** adalah persentase waktu CPU yang seharusnya digunakan oleh mesin virtual (VM) Anda, tetapi "dicuri" oleh **hypervisor** atau mesin virtual lain yang berjalan di atas sistem fisik yang sama. Steal time ini biasanya terjadi di lingkungan virtualisasi, di mana banyak mesin virtual berbagi sumber daya (seperti CPU) dari satu server fisik yang sama.
+>> 
+Mari kita coba menjelaskan ini dengan cara yang mudah dimengerti:
+>> 
+>> ### **Penjelasan Sederhana:**
+>> Bayangkan Anda sedang duduk di sebuah ruang kelas yang penuh dengan teman-teman Anda. Anda semua harus berbagi satu buku untuk membaca. Buku ini diibaratkan sebagai **CPU**, dan Anda serta teman-teman Anda adalah **mesin virtual (VM)** yang membutuhkan waktu CPU untuk menjalankan aplikasi.
+>> 
+>> - **Guru** adalah **hypervisor**, yaitu perangkat lunak yang mengatur siapa yang boleh menggunakan buku (CPU) pada waktu tertentu.
+>> - Semua orang di kelas (VM) membutuhkan buku tersebut, tetapi hanya ada satu buku.
+>> - **Steal time** terjadi ketika **guru** (hypervisor) memberikan buku tersebut ke teman Anda yang lain, sementara Anda harus menunggu giliran.
+>> 
+>> Jadi, saat guru memberikan buku ke teman lain, Anda tidak bisa menggunakannya, meskipun Anda membutuhkan buku tersebut. Ini yang >> disebut sebagai **"steal time"** — waktu di mana CPU yang seharusnya digunakan oleh VM Anda malah digunakan oleh VM lain atau oleh >> **hypervisor** itu sendiri.
+>> 
+>> ### **Contoh Kasus di Dunia Nyata:**
+>> 
+>> #### **1. Mesin Virtual di Laptop atau Server:**
+Jika Anda menjalankan beberapa mesin virtual di server atau laptop yang sama, mereka semua berbagi **CPU fisik** yang sama. Misalnya:
+>> - **VM A** menjalankan aplikasi yang berat dan membutuhkan banyak CPU.
+>> - **VM B** menjalankan aplikasi yang lebih ringan.
+>> 
+>> Jika **VM A** terus menerus menggunakan banyak CPU, **VM B** mungkin akan melihat peningkatan pada **steal time** (st), karena CPU yang seharusnya digunakan oleh **VM B** "dicuri" untuk diberikan ke **VM A** yang lebih membutuhkan CPU.
+>> 
+>> #### **2. Layanan Cloud:**
+>> Jika Anda menggunakan layanan cloud seperti **AWS** atau **Google Cloud**, kadang-kadang Anda berbagi CPU dengan pengguna lain di server yang sama. Ini disebut sebagai **shared resources**.
+>> - Jika pengguna lain di server yang sama dengan Anda menggunakan banyak CPU, maka Anda mungkin akan merasakan penurunan kinerja pada VM Anda karena **CPU Anda "dicuri"**.
+>> - Misalnya, jika satu VM pengguna lain menggunakan banyak CPU, VM Anda mungkin harus **menunggu giliran** untuk mendapatkan akses ke CPU, dan waktu yang hilang ini disebut sebagai **steal time**.
+>> 
+>> ### **Cara Membaca Steal Time pada Output top:**
+>> Saat Anda menjalankan perintah **`top`** di dalam mesin virtual (VM), Anda akan melihat bagian **`%Cpu(s):`** yang menunjukkan >> bagaimana CPU dibagi-bagi. Salah satu kolom yang terlihat adalah **`st` (steal time)**.
+>> 
+>> Contoh output:
+>> ```
+>> %Cpu(s):  5.2 us,  3.4 sy,  0.0 ni, 91.1 id,  0.2 wa,  0.0 hi,  0.0 si,  0.1 st
+>> ```
+>> 
+>> - **st = 0.1%** berarti 0.1% dari waktu CPU Anda **"dicuri"** oleh hypervisor atau mesin virtual lain.
+>> - **st = 10%** berarti 10% dari waktu CPU Anda digunakan oleh **hypervisor atau VM lain**, yang menyebabkan kinerja VM Anda menurun.
+>> 
+>> Jika nilai **st** terlalu tinggi, berarti ada masalah dengan **overhead** virtualisasi atau **over-subscription** CPU (terlalu banyak VM pada satu server fisik).
+>> 
+>> ### **Penyebab Steal Time yang Tinggi:**
+>> 1. **CPU Overload (Kelebihan Beban CPU):**
+>>    - Jika terlalu banyak mesin virtual yang berjalan pada satu server fisik, maka CPU akan terbagi-bagi di antara VM yang banyak itu. Akibatnya, masing-masing VM hanya mendapatkan sedikit bagian dari CPU, sehingga meningkatkan **steal time**.
+>> 
+>> 2. **Hypervisor Memprioritaskan VM Lain:**
+>>    - Hypervisor (seperti VMware, KVM, atau Xen) mengelola penggunaan CPU oleh semua VM. Jika ada VM lain yang membutuhkan lebih banyak CPU, hypervisor akan memberi waktu CPU lebih banyak kepada VM tersebut. Ini dapat menyebabkan **VM Anda menunggu** dan mendapatkan lebih sedikit CPU, yang menghasilkan **steal time**.
+>> 
+>> 3. **Shared CPU di Layanan Cloud:**
+>>    - Di layanan cloud, seperti **AWS EC2** atau **Google Cloud**, CPU di server fisik sering kali dibagikan dengan banyak pelanggan (shared resources). Jika pelanggan lain memonopoli CPU, maka VM Anda akan mengalami **steal time**, yang menyebabkan penurunan kinerja.
+>> 
+>> 4. **Proses Berat pada VM Lain:**
+>>    - Jika ada VM lain yang menggunakan banyak CPU (misalnya untuk tugas berat atau aplikasi intensif CPU), VM lain di server yang sama akan merasakan **steal time** lebih tinggi.
+>> 
+>> ### **Contoh:**
+>> - Anda menjalankan **3 VM** di satu server fisik.
+>> - VM A menggunakan banyak CPU untuk menjalankan aplikasi berat.
+>> - VM B dan C mulai merasakan **steal time** karena CPU yang seharusnya digunakan oleh mereka sedang digunakan oleh VM A.
+>> 
+>> ### **Kesimpulan:**
+>> - **Steal time** adalah waktu yang hilang ketika CPU yang seharusnya digunakan oleh mesin virtual Anda "dicuri" oleh mesin virtual lain atau hypervisor.
+>> - Steal time terjadi di lingkungan **virtualisasi** (seperti di **cloud** atau **server fisik dengan banyak VM**).
+>> - Jika nilai **st** tinggi, kinerja aplikasi atau sistem Anda bisa menurun, dan Anda perlu memeriksa alokasi CPU, beban kerja mesin virtual lain, atau sumber daya server fisik.
+>> 
+>> Memahami steal time sangat penting untuk memecahkan masalah kinerja pada sistem yang berjalan di atas virtualisasi atau cloud, >> terutama ketika ada banyak mesin virtual yang saling berbagi sumber daya.
+>> 
+>> 
 
 
 ## **Ringkasan Mudah:**
