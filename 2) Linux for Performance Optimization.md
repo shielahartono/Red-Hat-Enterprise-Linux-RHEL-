@@ -615,7 +615,72 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 >> ### **Kesimpulan**  
 >> - **`si` (software interrupts)** menunjukkan seberapa sering CPU berhenti bekerja untuk menangani permintaan khusus dari perangkat lunak.  
 >> - Nilai kecil biasanya normal, tetapi jika nilainya tinggi, ini bisa menjadi tanda bahwa ada **aplikasi atau proses** yang terlalu sering mengganggu CPU, yang bisa mempengaruhi kinerja sistem.
+>>
+>> ### **Apa Itu Software Interrupt?**  
+>> Software interrupt adalah **gangguan** yang dikirim ke CPU oleh **perangkat lunak (software)**, bukan perangkat keras. Ini terjadi ketika **program atau aplikasi** meminta perhatian CPU untuk menyelesaikan tugas tertentu **secara mendesak**.
 >> 
+>> Berbeda dengan **hardware interrupt** (yang berasal dari perangkat keras seperti keyboard atau mouse), **software interrupt** dibuat oleh perangkat lunak atau sistem operasi itu sendiri.
+>> 
+>> 
+>> 
+>> ### **Bagaimana Software Interrupt Terjadi?**  
+>> Software interrupt terjadi melalui **instruksi khusus** yang dikirim oleh program ke CPU. Ini memaksa CPU untuk **berhenti sementara** dari tugasnya saat ini dan **memproses permintaan software**.
+>> 
+>> **Prosesnya**:  
+>> 1. **Program/Aplikasi** mendeteksi adanya sesuatu yang harus segera dikerjakan (contohnya operasi I/O atau jaringan).  
+>> 2. Program mengirim **software interrupt** ke CPU.  
+>> 3. CPU berhenti sebentar dari pekerjaan utamanya dan **menjalankan kode khusus (handler)** untuk menangani interrupt ini.  
+>> 4. Setelah selesai, CPU kembali ke tugas sebelumnya.
+>> 
+>> 
+>> ### **Contoh Situasi yang Menyebabkan Software Interrupt**  
+>> 
+>> #### 1. **Update Aplikasi**  
+>> Ketika sebuah program meminta CPU untuk melakukan sesuatu yang memerlukan **interaksi dengan perangkat keras**, seperti **menulis atau membaca data ke disk**, program akan mengirim **software interrupt**.  
+>> 
+>> **Contoh prosesnya**:  
+>> - Anda sedang menjalankan program editing video.  
+>> - Program meminta CPU untuk menyimpan (write) file ke disk.  
+>> - Agar proses penyimpanan ini segera diprioritaskan, program **mengirim software interrupt** ke CPU.  
+>> - CPU berhenti sebentar dan memproses instruksi ini agar disk dapat menulis data.
+>> 
+>> 
+>> #### 2. **Pengelolaan Jaringan**  
+>> Ketika program membutuhkan akses ke **jaringan** untuk mengirim atau menerima data, program bisa mengirim **software interrupt** ke CPU.  
+>> 
+>> **Contoh prosesnya**:  
+>> - Anda sedang menggunakan browser untuk mengakses situs web.  
+>> - Browser meminta koneksi jaringan untuk mendownload halaman web.  
+>> - Browser **mengirim software interrupt** ke CPU agar permintaan jaringan ini segera diproses.  
+>> - CPU memprioritaskan permintaan jaringan, memprosesnya, lalu kembali ke pekerjaan lain.
+>> 
+
+
+#### 3. **Operasi I/O Software**  
+Aplikasi yang membaca atau menulis data dari file atau perangkat lain (seperti disk atau USB) akan mengirim **software interrupt**.  
+
+**Contoh prosesnya**:  
+- Anda membuka file dokumen di program pengolah kata.  
+- Program mengirim permintaan ke CPU untuk membaca data file dari disk.  
+- Program ini **mengirim software interrupt** ke CPU agar permintaan pembacaan data segera ditangani.  
+- CPU memproses permintaan tersebut dan membaca file dari disk.
+
+
+
+### **Mengapa Software Interrupt Dibutuhkan?**  
+Software interrupt memungkinkan program atau aplikasi untuk **mendapat perhatian CPU lebih cepat** saat ada tugas penting yang harus segera dikerjakan. Tanpa software interrupt, program harus menunggu CPU menyelesaikan semua tugasnya terlebih dahulu, yang akan memperlambat sistem.
+
+
+
+### **Kesimpulan**  
+Software interrupt terjadi ketika program atau aplikasi meminta perhatian CPU untuk melakukan **tugas khusus**, seperti:  
+1. **Menyimpan atau membaca data** (update aplikasi atau file I/O).  
+2. **Mengakses jaringan** (mengirim atau menerima data).  
+3. **Melakukan tugas dengan prioritas tertentu**.  
+
+Dengan software interrupt, CPU bisa merespons permintaan tersebut lebih cepat, sehingga sistem berjalan **lebih efisien** dan aplikasi dapat berjalan dengan lancar.  
+
+
 
 
  #### **8. `st` (steal) - Waktu CPU yang Dipakai Mesin Virtual**  
