@@ -1115,6 +1115,49 @@ Jika Anda menjalankan beberapa mesin virtual di server atau laptop yang sama, me
 >> 
 >> Jadi, selama tidak ada **kerentanannya** dalam **hypervisor** atau konfigurasi yang membiarkan akses tidak sah, **VM yang terinfeksi virus tidak akan menular ke VM lain**.
 >>
+>> --------
+>> ## Network (Jaringan) yang terpisah dalam Hypervisor
+>> 
+>> **Jaringan Terpisah dalam Hypervisor** berarti bahwa setiap mesin virtual (VM) yang berjalan di atas server fisik yang sama bisa memiliki **koneksi jaringan yang terisolasi**, meskipun mereka berbagi perangkat keras yang sama. Ini memungkinkan setiap VM untuk bertindak **seolah-olah** mereka adalah **mesin terpisah** di jaringan, dengan **alamat IP** dan konfigurasi jaringan mereka sendiri.
+>> 
+>> Mari kita jelaskan dengan cara yang mudah dimengerti:
+>> 
+>> ### Penjelasan Sederhana:
+>> Bayangkan Anda berada di dalam sebuah gedung besar yang memiliki banyak kantor (VM). Setiap kantor memiliki **alamatnya sendiri** (alamat IP), dan **telepon pribadi** untuk berkomunikasi dengan orang lain (koneksi jaringan). Meskipun semua kantor ada di dalam gedung yang sama (server fisik yang sama), masing-masing kantor **tidak bisa mengganggu atau mendengarkan percakapan** yang terjadi di kantor lainnya.
+>> 
+>> Dalam konteks **hypervisor**, meskipun VM berbagi server fisik yang sama, mereka bisa diberikan **akses jaringan yang terpisah** sehingga masing-masing VM dapat berfungsi **secara independen**, seperti mesin yang terpisah di dunia nyata.
+>> 
+>> ### Penjelasan dengan Detail:
+>> 1. **Alamat IP Terpisah untuk Setiap VM**:
+>>    - Setiap VM di server fisik dapat diberikan **alamat IP** yang unik. Hal ini memungkinkan VM untuk **berkomunikasi** dengan mesin lain di jaringan tanpa gangguan dari VM lain yang berjalan di server fisik yang sama.
+>>    
+>> 2. **Isolasi Jaringan**:
+>>    - Meski secara fisik menggunakan perangkat keras yang sama, hypervisor dapat mengatur agar jaringan yang digunakan oleh setiap VM **terisolasi satu sama lain**. Ini berarti, secara logika, VM di jaringan ini **tidak bisa saling melihat atau mengakses** kecuali ada konfigurasi tertentu yang mengizinkan komunikasi antar VM.
+>>    - Ini sangat berguna untuk **keamanan**. Jika satu VM terinfeksi virus atau ada aplikasi berbahaya, VM lain yang terisolasi di jaringan yang berbeda **tidak akan terpengaruh**.
+>> 
+>> 3. **Menggunakan Virtual Switch (vSwitch)**:
+>>    - Hypervisor sering menggunakan **virtual switch (vSwitch)** untuk menghubungkan VM ke jaringan fisik atau ke jaringan internal yang terisolasi. **Virtual switch** ini bertindak seperti **switch jaringan biasa**, tetapi berada di dalam lapisan virtualisasi.
+>>    - Virtual switch dapat menghubungkan VM ke **jaringan internal** yang tidak terhubung langsung ke dunia luar (misalnya internet), atau ke **jaringan fisik** yang bisa mengakses dunia luar.
+>> 
+>> 4. **Keamanan Jaringan**:
+>>    - Jaringan terpisah memberikan **keamanan yang lebih tinggi** karena VM yang terisolasi tidak dapat dengan mudah berkomunikasi dengan VM lain tanpa izin. Ini mirip dengan bagaimana di dunia nyata **jaringan perusahaan** dapat dipisahkan menjadi beberapa subnet agar tidak saling mengakses satu sama lain tanpa pengaturan firewall atau izin akses yang tepat.
+>> 
+>> 5. **Mengelola Sumber Daya Jaringan**:
+>>    - Selain mengisolasi VM di jaringan terpisah, hypervisor juga memungkinkan pengelolaan **bandwidth dan prioritas jaringan** untuk setiap VM, memastikan bahwa satu VM tidak akan mengambil terlalu banyak sumber daya jaringan dan mengganggu VM lainnya.
+>> 
+>> ### Contoh Penggunaan Jaringan Terpisah di Hypervisor:
+>> 1. **Lingkungan Pengujian dan Produksi**:
+>>    - Misalkan Anda memiliki dua VM. Satu digunakan untuk **pengujian aplikasi** dan satu lagi untuk **lingkungan produksi**. Dengan jaringan terpisah, meskipun keduanya berjalan di server fisik yang sama, jaringan yang digunakan oleh **VM pengujian** tidak akan dapat mengakses **jaringan produksi**. Ini mencegah kemungkinan aplikasi pengujian yang bermasalah merusak sistem produksi.
+>> 
+>> 2. **Keamanan Data**:
+>>    - Dalam lingkungan yang lebih sensitif, seperti **perbankan** atau **data pribadi**, VM yang berisi data sensitif dapat diisolasi di **jaringan terpisah** untuk memastikan bahwa hanya VM yang memiliki izin yang dapat mengaksesnya, sementara VM lain yang tidak relevan tetap aman dan terisolasi.
+>> 
+>> 3. **Lingkungan Cloud**:
+>>    - Di **cloud services** seperti AWS, Azure, atau Google Cloud, meskipun VM Anda mungkin berjalan di server fisik yang sama dengan VM dari pelanggan lain, Anda bisa memastikan bahwa VM Anda memiliki **jaringan terpisah** yang hanya dapat diakses oleh mesin atau aplikasi tertentu, bukan oleh pelanggan lain di server yang sama.
+>> 
+>> ### Kesimpulan:
+>> **Jaringan Terpisah** pada **Hypervisor** memberikan **isolasi** antara VM yang berjalan di perangkat keras yang sama. Ini berarti setiap VM memiliki **alamat IP** dan **pengaturan jaringan yang terpisah**, dan dapat berfungsi **seperti mesin yang terpisah** di jaringan. Isolasi ini memberikan **keamanan** dan **pengelolaan yang lebih baik**, karena VM yang terinfeksi atau bermasalah tidak akan memengaruhi VM lain yang berjalan pada server yang sama. Ini juga memungkinkan pengaturan khusus untuk komunikasi jaringan dan manajemen sumber daya di dunia virtualisasi.
+>>
 >> 
 ## **Ringkasan Mudah:**
 | Statistik | Arti Sederhana | Jika Angka Tinggi |
