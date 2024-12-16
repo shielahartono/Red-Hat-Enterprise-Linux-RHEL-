@@ -125,7 +125,7 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 
 - **Apa itu?**  
    Ini adalah **persentase waktu CPU** yang digunakan oleh **aplikasi atau program** yang User jalankan.  
-   Contohnya, membuka browser, memutar video, atau menjalankan program pengolah kata.
+   Contohnya, membuka browser, Video Player, atau menjalankan program Microsoft Word.
 
 - **Penjelasan Sederhana:**  
    Kalau angka ini tinggi, berarti CPU Anda sibuk menjalankan **program-program yang Kita (User) buka sendiri**.
