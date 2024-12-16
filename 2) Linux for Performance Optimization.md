@@ -584,18 +584,50 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 - **Contoh:**  
    Jika `si = 0.5%`, berarti **0.5% dari CPU** digunakan untuk menangani permintaan dari aplikasi.
 
+>> ^for your information^
+>> 
+>> 
+>> #### **Apa itu Software Interrupt?**  
+>> Software interrupt adalah mekanisme di mana **aplikasi** atau **program** meminta CPU untuk menghentikan apa yang sedang dikerjakan >> dan segera melakukan suatu tugas yang dianggap mendesak atau penting.  
+>> 
+>> #### **Bagaimana cara kerjanya?**  
+>> 1. Aplikasi mengirimkan **"permintaan khusus"** kepada CPU.  
+>> 2. CPU akan menghentikan tugas yang sedang dikerjakan (sementara) dan fokus pada permintaan tersebut.  
+>> 3. Setelah tugas interrupt selesai, CPU akan melanjutkan pekerjaan sebelumnya.
+>> 
+>> #### **Contoh Situasi Software Interrupt:**  
+>> - **Update aplikasi**: Jika Anda sedang menjalankan program, dan aplikasi meminta CPU untuk menulis atau membaca data ke disk dengan prioritas khusus, ini bisa memicu software interrupt.  
+>> - **Pengelolaan jaringan**: Misalnya, aplikasi yang meminta akses jaringan secara mendadak dapat mengirim interrupt ke CPU agar segera diproses.  
+>> - **I/O Operasi Software**: Aplikasi membaca file dari sistem atau perangkat I/O (Input/Output) bisa memicu software interrupts.
+>> 
+>> ### **Apa Maksud Angka `si`?**  
+>> - Jika pada perintah `top` Anda melihat **`si = 0.5%`**, artinya **0.5% dari waktu CPU digunakan untuk menangani software interrupts** yang berasal dari aplikasi atau proses yang meminta perhatian CPU.  
+>> - **Nilai Kecil**: Biasanya normal. Software interrupts dalam jumlah kecil terjadi secara wajar.  
+>> - **Nilai Besar**: Jika nilai **`si`** tinggi (misalnya di atas **5-10%**), ini mungkin menunjukkan **ada aplikasi yang terlalu sering meminta CPU** untuk melakukan tugas mendesak. Hal ini bisa membebani CPU dan menurunkan performa sistem.  
+>> 
+>> 
+>> ### **Penyebab `si` Tinggi**  
+>> - Aplikasi yang tidak efisien atau memiliki **bug**.  
+>> - Proses atau program yang berulang kali mengakses jaringan, disk, atau perangkat lainnya.  
+>> - Sistem operasi atau driver perangkat lunak yang mengganggu kinerja CPU.
+>> 
+>> 
+>> ### **Kesimpulan**  
+>> - **`si` (software interrupts)** menunjukkan seberapa sering CPU berhenti bekerja untuk menangani permintaan khusus dari perangkat lunak.  
+>> - Nilai kecil biasanya normal, tetapi jika nilainya tinggi, ini bisa menjadi tanda bahwa ada **aplikasi atau proses** yang terlalu sering mengganggu CPU, yang bisa mempengaruhi kinerja sistem.
+>> 
 
 
-#### **8. `st` (steal) - Waktu CPU yang Dipakai Mesin Virtual**  
-- **Apa itu?**  
-   Ini adalah **persentase waktu CPU** yang digunakan oleh mesin virtual atau hypervisor. Ini terjadi jika Anda menjalankan sistem operasi di dalam mesin virtual (VM).
-
-- **Penjelasan Sederhana:**  
-   Kalau angka ini tinggi, itu berarti CPU "dicuri" oleh mesin virtual dan tidak bisa digunakan oleh sistem utama.
-
-- **Contoh:**  
-   Jika `st = 5%`, artinya **5% dari CPU** digunakan oleh mesin virtual.
-
+ #### **8. `st` (steal) - Waktu CPU yang Dipakai Mesin Virtual**  
+ - **Apa itu?**  
+    Ini adalah **persentase waktu CPU** yang digunakan oleh mesin virtual atau hypervisor. Ini terjadi jika Anda menjalankan sistem >> operasi di dalam mesin virtual (VM).
+ 
+ - **Penjelasan Sederhana:**  
+    Kalau angka ini tinggi, itu berarti CPU "dicuri" oleh mesin virtual dan tidak bisa digunakan oleh sistem utama.
+ 
+ - **Contoh:**  
+    Jika `st = 5%`, artinya **5% dari CPU** digunakan oleh mesin virtual.
+ 
 
 
 ## **Ringkasan Mudah:**
