@@ -418,7 +418,8 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
    Ini adalah **persentase waktu CPU** yang dihabiskan untuk **menunggu perangkat I/O** seperti **hard disk atau jaringan** selesai membaca/menulis data.
 
 - **Penjelasan Sederhana:**  
-   Kalau angka ini tinggi, CPU sedang menunggu perangkat keras yang lambat, seperti hard disk yang butuh waktu lama untuk memproses data.
+   Kalau angka ini tinggi, CPU sedang menunggu perangkat keras yang lambat, seperti hard disk yang butuh waktu lama untuk memproses data. <br/>
+  (kalau angka ini tinggi, artinya terdapat Bottleneck) <br/>
 
 - **Contoh:**  
    Jika `wa = 10%`, itu artinya CPU menghabiskan **10% waktunya hanya untuk menunggu** hard disk atau perangkat lain menyelesaikan tugas.
