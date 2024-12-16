@@ -163,6 +163,86 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 - **Contoh:**  
    Jika `sy = 15%`, itu artinya **15% dari CPU** digunakan untuk menjalankan tugas-tugas sistem.
 
+>> ^For your Information^
+>> ## Proses Sistem atau Kernel :
+>> 
+>>  **Proses Sistem atau Kernel** adalah tugas-tugas yang dijalankan oleh sistem operasi, khususnya oleh **kernel**, yang merupakan >> >> inti dari sistem operasi. Kernel bertugas mengatur bagaimana perangkat keras (seperti CPU, memori, dan perangkat I/O) berinteraksi >> dengan perangkat lunak (program dan aplikasi). 
+>> 
+>> Dengan kata lain, **kernel** berfungsi sebagai jembatan antara **perangkat keras** komputer dan **program-program** yang Anda jalankan.
+>> 
+>> 
+>> 
+>> ### **Apa itu Proses Sistem atau Kernel?**
+>> 
+>> - **Kernel** adalah bagian dari sistem operasi yang **selalu aktif** dan berjalan di latar belakang.  
+>> - Kernel menangani tugas-tugas penting, seperti:  
+>>   - **Mengatur CPU** untuk menjalankan proses.  
+>>   - **Mengelola memori** agar program dapat berjalan.  
+>>   - **Mengatur perangkat input/output (I/O)**, seperti membaca data dari hard disk atau mengirim data ke printer.  
+>>   - **Menangani keamanan**, seperti memberikan izin akses ke file atau program.  
+>>   - **Menjadwalkan proses** (membagi waktu CPU di antara proses-proses yang berjalan).  
+>> 
+>> 
+>> ### **Tugas-tugas yang Termasuk Proses Sistem atau Kernel**
+>> 
+>> Berikut ini adalah beberapa **contoh task (tugas)** yang dilakukan oleh kernel atau proses sistem:
+>> 
+>> 1. **Manajemen Proses**  
+>>    - Kernel memastikan setiap program atau proses mendapatkan giliran waktu CPU.  
+>>    - Contoh: Kernel menunda satu proses sejenak agar proses lain bisa berjalan.
+>> 
+>> 2. **Manajemen Memori**  
+>>    - Kernel mengatur bagaimana memori RAM dibagi-bagi ke berbagai proses yang berjalan.  
+>>    - Contoh: Kernel menyediakan ruang memori untuk aplikasi yang Anda buka, dan membebaskannya saat aplikasi ditutup.
+>> 
+>> 3. **Operasi Input/Output (I/O)**  
+>>    - Kernel menangani operasi yang berhubungan dengan perangkat keras, seperti membaca file dari hard disk, menulis data, atau menangani keyboard dan mouse.  
+>>    - Contoh: Saat Anda membuka file, kernel bertugas membaca file dari hard disk dan menampilkannya di layar.
+>> 
+>> 4. **Manajemen File System**  
+>>    - Kernel mengatur bagaimana file disimpan, dibaca, dan dimodifikasi di sistem penyimpanan (seperti SSD atau hard disk).  
+>>    - Contoh: Ketika Anda menyimpan dokumen, kernel memastikan data ditulis ke lokasi yang tepat.
+>> 
+>> 5. **Jaringan**  
+>>    - Kernel menangani komunikasi data melalui jaringan (internet atau lokal).  
+>>    - Contoh: Kernel mengatur bagaimana data dikirim atau diterima saat Anda membuka halaman web atau mengunduh file.
+>> 
+>> 6. **Keamanan dan Akses Kontrol**  
+>>    - Kernel memeriksa izin akses ke file, direktori, atau perangkat keras untuk menjaga keamanan sistem.  
+>>    - Contoh: Kernel membatasi akses pengguna biasa agar tidak bisa mengubah file sistem.
+>> 
+>> 7. **Interrupt Handling**  
+>>    - Kernel menangani sinyal "interupsi" dari perangkat keras. Ini terjadi ketika perangkat keras memerlukan perhatian CPU.  
+>>    - Contoh: Ketika Anda menekan tombol keyboard, perangkat keras mengirim sinyal interupsi, dan kernel akan menangani input itu.
+>> 
+
+
+### **Contoh Nyata dari Task Proses Sistem**  
+
+1. **Ketika Anda Menyalakan Komputer**  
+   - Kernel mengatur proses booting dan memastikan sistem operasi dimuat ke memori.
+
+2. **Ketika Anda Membuka File**  
+   - Kernel membaca file dari hard disk dan menyediakan datanya ke aplikasi yang membutuhkannya.
+
+3. **Ketika Anda Menjalankan Program**  
+   - Kernel memberikan alokasi CPU dan memori agar program dapat berjalan dengan baik.
+
+4. **Ketika Anda Mengunduh File**  
+   - Kernel mengatur transfer data dari jaringan ke perangkat penyimpanan.
+
+5. **Ketika Anda Menekan Tombol Keyboard**  
+   - Kernel menerima input dari keyboard dan meneruskannya ke program yang sedang Anda gunakan.
+
+6. **Ketika Banyak Program Berjalan Sekaligus**  
+   - Kernel membagi waktu CPU di antara program-program tersebut agar semuanya berjalan dengan lancar.
+
+
+
+### **Kesimpulan Sederhana**  
+- **Proses Sistem atau Kernel** adalah tugas-tugas inti yang dijalankan oleh sistem operasi untuk memastikan semua komponen komputer bekerja dengan baik.  
+- Kernel melakukan pekerjaan "di balik layar" seperti mengatur CPU, memori, I/O, dan keamanan.  
+- Jika **`sy`** (system) tinggi, itu berarti CPU sedang sibuk melakukan tugas-tugas sistem, seperti membaca file, menangani input/output, atau membagi waktu CPU ke banyak proses.
 
 #### **3. `ni` (nice) - Waktu untuk Proses Prioritas Rendah**  
 - **Apa itu?**  
