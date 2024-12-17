@@ -132,6 +132,109 @@ Di sini, tidak ada proses yang dihentikan. <br/>
 6. **Zombie (0 zombie)**:  
    Proses **zombie** adalah proses yang telah selesai dieksekusi tetapi masih memiliki entri di tabel proses karena parent process-nya belum mengambil status akhir proses tersebut. Zombie adalah proses yang tidak lagi aktif tetapi tidak sepenuhnya dibersihkan oleh sistem. Di sini, tidak ada proses zombie, yang berarti sistem berjalan dengan baik tanpa proses yang tertinggal.
 
+>> ^For your Information^
+>> 
+>> ## Proses Zombie
+>> 
+>> ### Apa itu Proses Zombie?
+>> - Ketika sebuah **proses** di komputer (misalnya program atau aplikasi) selesai bekerja, proses tersebut seharusnya mengembalikan **statusnya** ke **proses induk** yang memulainya. Status ini berisi informasi penting, seperti apakah proses berhasil atau gagal, dan informasi lainnya.
+>>   
+>> - Jika **proses induk** tidak mengambil status ini (karena suatu alasan), maka proses yang sudah selesai akan tetap terdaftar di sistem sebagai **proses zombie**.
+>> 
+>> ### Analogi yang Mudah Dipahami:
+>> Bayangkan Anda sedang bekerja di sebuah kantor dan Anda sudah menyelesaikan tugas Anda, yaitu mengetik laporan. Anda memberikan laporan itu kepada **bos Anda** untuk diperiksa dan diberi tanda tangan. Namun, **bos Anda** tidak segera memeriksa laporan Anda dan meninggalkannya begitu saja di mejanya.
+>> 
+>> - **Laporan yang sudah selesai** = Proses yang sudah selesai bekerja (misalnya, program sudah selesai).
+>> - **Bos Anda** = Proses induk, yang bertanggung jawab untuk mengambil status laporan.
+>> - **Laporan yang tertinggal di meja bos** = Proses zombie, yang sudah selesai tetapi masih ada di sistem karena bos Anda belum mengambilnya.
+>> 
+>> ### Apa yang Terjadi pada Sistem?
+>> - Proses yang sudah selesai seharusnya dihapus dari sistem setelah statusnya diambil oleh proses induk.
+>> - Jika **proses induk** tidak segera mengambil status tersebut, maka proses yang sudah selesai tetap ada di dalam **daftar sistem** meskipun tidak aktif.
+>> 
+>> 
+>> ### Kenapa Ini Bisa Terjadi?
+>> Proses zombie bisa terjadi karena beberapa alasan, seperti:
+>> 1. **Proses induk lupa atau tidak merespons** untuk mengambil status proses selesai.
+>> 2. Proses induk sudah **berhenti bekerja** atau mengalami masalah, jadi tidak bisa mengambil status proses anaknya.
+>> 
+>> 
+>> ### Apa Masalahnya?
+>> - Meskipun proses zombie **tidak aktif**, **masih memakan entri di tabel proses** yang bisa mengarah pada **penurunan kinerja** jika terlalu banyak zombie.
+>> - Biasanya, proses zombie tidak akan menggunakan banyak **CPU** atau **memori**, tetapi mereka tetap ada di sistem dan **mengambil ID proses** yang bisa digunakan oleh proses lain.
+>> 
+>> ### Apa yang Terjadi Jika Ada Banyak Proses Zombie?
+>> Jika terlalu banyak proses zombie yang menumpuk, sistem bisa mengalami **kekurangan ID proses** atau penurunan kinerja karena sistem harus terus menjaga entri-entri tersebut meskipun mereka tidak aktif.
+>> 
+>> ### Bagaimana Proses Zombie Bisa Terjadi?
+>> - Ketika proses selesai, sistem memberi tahu **proses induk** bahwa proses tersebut sudah selesai.
+>> - Jika **proses induk** tidak "mengambil" informasi status ini (misalnya, dengan menggunakan sistem panggilan `wait()` untuk mengambil exit status), proses zombie tetap ada di tabel.
+>> - Proses induk bisa mengabaikan atau tidak merespons dengan cepat, menyebabkan proses zombie tetap ada.
+>> 
+>> ### Penyelesaian:
+>> - Biasanya, **proses induk** yang bertanggung jawab untuk "menyelesaikan" proses zombie. Jika proses induk gagal, sistem atau admin dapat mengambil langkah untuk "menghapus" zombie dengan mengirimkan sinyal ke proses induk atau membunuh proses zombie secara manual.
+>> - Pada sistem Linux, proses zombie akan hilang secara otomatis jika proses induknya diakhiri (misalnya, jika proses induk dihentikan atau di-restart).
+>> 
+>> - Proses **zombie** adalah proses yang sudah selesai dieksekusi, namun masih ada dalam sistem karena **proses induk** (proses yang memulai proses tersebut) belum mengambil status akhir dari proses tersebut. Meskipun proses zombie sudah tidak aktif dan tidak lagi menggunakan sumber daya seperti **CPU** atau **memori**, mereka tetap **mengambil ID proses** di sistem.
+>> 
+>> - **Tidak Menggunakan CPU atau Memori**: Setelah proses selesai, proses zombie tidak melakukan pekerjaan atau menjalankan kode apapun, sehingga tidak membutuhkan sumber daya seperti **CPU** (prosesor) atau **memori** (RAM).
+>>   
+>> - **Tetap Mengambil ID Proses**: Setiap proses di sistem diberikan **ID proses unik (PID)**. Proses zombie tetap mempertahankan PID mereka meskipun mereka sudah selesai. PID ini penting agar sistem tahu proses mana yang sedang berjalan, dan jika banyak zombie, bisa jadi ada banyak PID yang "terbuang" atau **terbengkalai**.
+>> 
+>> - **Masalah Jika Banyak Zombie**: 
+>>   - Bayangkan jika ada banyak proses zombie yang menumpuk. Setiap zombie masih menggunakan **PID**, jadi sistem bisa kehabisan ID proses yang bisa digunakan untuk proses lain. 
+>>   - Jika ini terjadi, mungkin sistem tidak dapat membuat proses baru karena tidak ada ID proses yang tersedia untuk mereka.
+>>   - Jadi, meskipun zombie tidak menggunakan sumber daya besar, mereka **mengambil ruang yang bisa digunakan oleh proses lain**.
+>> 
+>> ### Mengapa Hal Ini Bisa Menjadi Masalah?
+>> 
+>> Jika terlalu banyak proses zombie yang menumpuk tanpa dibersihkan, bisa mengganggu proses **pengelolaan ID proses** di sistem. Pada kasus yang sangat ekstrem, hal ini bisa mengarah pada kegagalan sistem dalam memulai proses baru, karena tidak ada ID proses yang tersedia.
+>> 
+>> 
+>> ### Kesimpulannya:
+>> Proses zombie adalah proses yang sudah selesai, tetapi tidak dihapus dari sistem karena **proses induknya belum mengambil status akhir**. Meskipun tidak aktif, proses zombie tetap "terjebak" di sistem, dan ini bisa mengganggu kinerja jika terlalu banyak proses zombie yang menumpuk.
+>> 
+>> -----------
+>> ## PID dan hubungannya dengan Proses Zombie
+>> 
+>> ### Apa itu PID (Process ID)?
+>> **PID** adalah **identifikasi unik** yang diberikan oleh sistem operasi kepada setiap proses yang dijalankan di komputer. Setiap kali Anda menjalankan aplikasi atau perintah di sistem Linux atau Unix, sistem operasi akan memberikan angka unik (PID) kepada proses tersebut.
+>> 
+>> ### Mengapa PID Penting?
+>> PID digunakan oleh sistem untuk **mengidentifikasi dan mengelola proses** yang berjalan. Ketika sistem ingin melakukan operasi pada proses tertentu—seperti menghentikan proses, mengalokasikan sumber daya, atau mengumpulkan informasi—sistem akan merujuk pada PID proses tersebut.
+>> 
+>> Setiap kali sebuah proses dibuat, PID baru diberikan. Ketika proses selesai, PID tersebut dibebaskan dan dapat digunakan oleh proses baru.
+>> 
+>> ### Bagaimana Proses Zombie Terkait dengan PID?
+>> Ketika sebuah proses selesai menjalankan tugasnya, biasanya proses induk (proses yang memulai proses tersebut) akan mengambil status akhir dari proses tersebut. Namun, jika proses induk tidak melakukan ini, proses tersebut tetap ada di sistem sebagai **proses zombie**. Proses zombie tetap **mempertahankan PID** yang telah diberikan, meskipun proses itu sudah tidak aktif lagi.
+>> 
+>> **Masalahnya:**
+>> - **PID yang Terambil**: PID yang seharusnya dibebaskan ketika proses selesai, tetap "terambil" oleh proses zombie. Ini berarti bahwa **PID tidak dapat digunakan oleh proses lain**.
+>> - **Keterbatasan PID**: Sistem operasi memiliki batas jumlah PID yang dapat digunakan pada satu waktu. Jika banyak proses zombie menumpuk, PID yang tersedia untuk proses baru akan habis, dan sistem tidak dapat membuat proses baru.
+>> 
+>> ### Analogi untuk Memahami PID dan Zombie:
+>> Bayangkan bahwa PID seperti **nomor antrian di rumah sakit**. Ketika Anda datang ke rumah sakit, Anda diberi nomor antrian unik (PID). Ketika giliran Anda tiba dan Anda selesai berobat, nomor antrian Anda dikembalikan ke sistem untuk digunakan oleh orang lain yang datang setelah Anda.
+>> 
+>> Namun, jika ada seseorang yang **tidak mengembalikan nomor antrian setelah selesai**, maka nomor itu tetap terpakai dan tidak bisa digunakan oleh orang lain. Jika banyak orang yang tidak mengembalikan nomor antrian mereka, akhirnya tidak ada nomor antrian yang tersisa untuk orang yang datang setelahnya. Ini adalah masalah yang terjadi dengan **proses zombie** — mereka tidak lagi aktif, tetapi **PID yang mereka miliki tetap terpakai**, sehingga **PID tidak dapat digunakan untuk proses baru**.
+>> 
+>> ### Bagaimana PID Dikelola di Sistem?
+>> 1. **Proses Baru**: Ketika sebuah proses baru dimulai, sistem memberi PID baru.
+>> 2. **Proses Selesai**: Ketika proses selesai, sistem membebaskan PID yang digunakan oleh proses tersebut, dan PID itu dapat digunakan oleh proses lain.
+>> 3. **Proses Zombie**: Jika proses induk tidak mengambil status akhir dari proses yang selesai, PID tetap terkunci oleh proses zombie. Meskipun proses zombie tidak aktif dan tidak menggunakan sumber daya besar, mereka **mengambil ruang yang seharusnya bisa digunakan oleh proses lain**.
+>> 
+>> ### Mengapa Hal Ini Menjadi Masalah?
+>> Jika terlalu banyak **proses zombie** yang menumpuk, maka **tidak ada cukup PID yang tersedia** untuk memulai proses baru. Ini bisa menyebabkan **sistem tidak bisa menjalankan proses baru**, yang tentunya akan mengganggu kinerja sistem dan membuatnya tidak stabil.
+>> 
+>> ### Cara Menangani Proses Zombie
+>> Proses zombie harus dihapus dengan cara **menunggu proses induk mengambil status akhir** atau dengan cara **mematikan proses induk** yang mungkin tidak bekerja dengan baik. Setelah proses induk mengumpulkan status proses zombie, sistem dapat **menghapus entri zombie** dan membebaskan PID yang terpakai.
+>> 
+>> ### Kesimpulan:
+>> - **PID** adalah nomor unik yang diberikan untuk setiap proses yang dijalankan.
+>> - **Zombie** adalah proses yang sudah selesai tetapi tidak dibersihkan oleh sistem karena induknya tidak mengambil status akhir.
+>> - **Zombie** mengambil **PID**, yang bisa menghalangi proses baru dibuat jika terlalu banyak zombie yang menumpuk.
+
+
+
 
 ### **Bagaimana Memahami Konsep Ini?**
 
