@@ -40,8 +40,8 @@ MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   5332.0 avail Mem
 
 ## (3) Penjelasan Output untuk Command `top` :
 
-### A. System Information :
-### (Informasi Sistem)
+## A. System Information :
+## (Informasi Sistem)
 
 ```
 top - 15:30:12 up 10 days, 3:45, 3 users, load average: 0.12, 0.05, 0.01
@@ -99,8 +99,80 @@ Jika load average Anda lebih tinggi dari jumlah CPU, misalnya 5 atau 6, ini bera
 - **Load average** yang lebih kecil dari jumlah CPU fisik berarti sistem Anda cukup longgar dan dapat menangani lebih banyak pekerjaan tanpa masalah.
 - **Load average** yang lebih besar dari jumlah CPU fisik menunjukkan bottleneck dan kemungkinan penurunan kinerja karena CPU tidak dapat menangani banyak proses secara bersamaan.
 
+## B. Proses-proses yang sedang berjalan :
+```
+Tasks: 182 total,   1 running, 181 sleeping,   0 stopped,   0 zombie
+```
 
-### B. Statistik CPU :
+
+Ini adalah informasi yang menunjukkan status proses-proses yang sedang berjalan di sistem **Red Hat Enterprise Linux (RHEL)**, yang bisa didapatkan melalui alat seperti **`top`** atau **`htop`**. 
+
+
+### **Penjelasan Istilah:**
+
+1. **Total Tasks (182 total)**:  
+   Ini menunjukkan **total jumlah proses** yang ada di sistem saat ini. Proses adalah unit eksekusi yang dijalankan oleh CPU, seperti aplikasi, layanan sistem, atau tugas lainnya. Di sini, ada **182 proses** yang berjalan.
+
+2. **Running (1 running)**:  
+   Ini menunjukkan jumlah proses yang **sedang aktif dan dieksekusi oleh CPU**. Dalam contoh ini, hanya ada **1 proses** yang sedang berjalan. Ini berarti hanya satu proses yang sedang menggunakan CPU saat ini.
+
+3. **Sleeping (181 sleeping)**:  
+   Proses yang **tidur** atau tidak aktif disebut "sleeping". Ini berarti bahwa 181 proses tidak sedang menggunakan CPU tetapi menunggu untuk melakukan tugas atau menunggu input (misalnya, menunggu data dari disk, menunggu input pengguna, dll). Proses dalam keadaan tidur masih ada di memori, tetapi tidak sedang bekerja aktif di CPU.
+
+4. **Stopped (0 stopped)**:  
+   Proses yang **terhenti** (stopped) berarti proses tersebut sedang tidak aktif karena dihentikan secara manual oleh pengguna atau oleh sistem (misalnya, dengan perintah `kill` atau `stop`). Di sini, tidak ada proses yang dihentikan.
+
+5. **Zombie (0 zombie)**:  
+   Proses **zombie** adalah proses yang telah selesai dieksekusi tetapi masih memiliki entri di tabel proses karena parent process-nya belum mengambil status akhir proses tersebut. Zombie adalah proses yang tidak lagi aktif tetapi tidak sepenuhnya dibersihkan oleh sistem. Di sini, tidak ada proses zombie, yang berarti sistem berjalan dengan baik tanpa proses yang tertinggal.
+
+
+### **Bagaimana Memahami Konsep Ini?**
+
+#### **Proses dalam Sistem Linux:**
+- Setiap program atau aplikasi yang dijalankan pada sistem Linux adalah **proses**. Misalnya, ketika Anda membuka aplikasi seperti browser, terminal, atau server web, itu adalah proses yang sedang berjalan.
+  
+- Proses bisa berada dalam berbagai status seperti **running**, **sleeping**, **stopped**, atau **zombie** tergantung pada apa yang mereka lakukan saat itu.
+
+#### **Status Proses:**
+1. **Running**: Proses yang sedang **aktif menggunakan CPU** untuk menjalankan tugas-tugasnya. Biasanya ada lebih banyak proses running pada sistem yang sibuk.
+2. **Sleeping**: Proses yang tidak aktif tetapi masih ada di memori. Mereka **menunggu sesuatu untuk dilanjutkan**, seperti data yang diterima dari perangkat keras atau menunggu pengguna untuk melakukan sesuatu.
+3. **Stopped**: Proses yang dihentikan atau dibekukan, mungkin karena intervensi pengguna atau sistem.
+4. **Zombie**: Proses yang sudah selesai tetapi masih ada dalam sistem karena belum dibersihkan dengan benar oleh proses induk (parent process).
+
+
+### **Contoh dalam Kehidupan Sehari-hari:**
+
+Bayangkan Anda sedang bekerja di sebuah kantor:
+- **Proses Running**: Seperti Anda yang sedang mengetik di komputer. Anda aktif menggunakan keyboard dan CPU (komputer) sedang bekerja untuk membantu Anda mengetik.
+- **Proses Sleeping**: Seperti Anda yang sedang menunggu email atau menunggu instruksi dari bos Anda. Komputer tidak melakukan apa-apa aktif, tetapi tetap siap untuk digunakan ketika Anda dibutuhkan.
+- **Proses Stopped**: Seperti Anda yang sedang beristirahat sejenak, tidak mengetik atau bekerja, tetapi siap kembali bekerja begitu bos memberi instruksi.
+- **Proses Zombie**: Seperti pekerjaan yang sudah selesai, tetapi Anda belum menyerahkan hasil pekerjaan tersebut kepada bos Anda. Pekerjaan ini tidak lagi aktif, tetapi statusnya belum dibersihkan.
+
+
+
+### **Mengapa Ini Penting?**
+
+Memahami status proses sangat penting untuk **mengelola kinerja** sistem Anda:
+- **Running process** memerlukan CPU, dan jika terlalu banyak proses yang aktif, bisa menyebabkan **beban CPU tinggi**.
+- **Sleeping process** menggunakan memori tetapi tidak terlalu mempengaruhi kinerja CPU. Namun, jika ada terlalu banyak proses tidur dan memori terbatas, ini bisa menyebabkan masalah memori.
+- **Zombie process** menunjukkan ada proses yang belum sepenuhnya dibersihkan, yang bisa mengakumulasi dan membebani sistem.
+  
+Dengan informasi ini, Anda bisa memantau dan mengelola sumber daya sistem (CPU, memori) dengan lebih efisien dan menyelesaikan masalah jika ada **keterlambatan, penggunaan CPU berlebihan, atau masalah terkait proses**.
+
+### **Kesimpulan:**
+
+- **Total Tasks** menunjukkan berapa banyak proses yang berjalan di sistem.
+- **Running** adalah proses yang sedang aktif di CPU.
+- **Sleeping** adalah proses yang tidak aktif, menunggu sesuatu.
+- **Stopped** adalah proses yang dihentikan secara manual.
+- **Zombie** adalah proses yang selesai tetapi belum dibersihkan sepenuhnya.
+
+Dengan memahami informasi ini, Anda bisa melakukan troubleshooting dan memastikan sistem berjalan dengan lancar.
+
+
+
+
+## C. Statistik CPU :
 ```
 %Cpu(s):  5.2 us,  3.4 sy,  0.0 ni, 91.1 id,  0.2 wa,  0.0 hi,  0.0 si,  0.0 st
 
