@@ -111,18 +111,25 @@ Ini adalah informasi yang menunjukkan status proses-proses yang sedang berjalan 
 ### **Penjelasan Istilah:**
 
 1. **Total Tasks (182 total)**:  
-   Ini menunjukkan **total jumlah proses** yang ada di sistem saat ini. Proses adalah unit eksekusi yang dijalankan oleh CPU, seperti aplikasi, layanan sistem, atau tugas lainnya. Di sini, ada **182 proses** yang berjalan.
+   Ini menunjukkan **total jumlah proses** yang ada di sistem saat ini. <br/>
+yang mana, "Proses" adalah unit eksekusi yang dijalankan oleh CPU, seperti aplikasi, layanan sistem, atau tugas lainnya. <br/>
+Di sini, ada **182 proses** yang berjalan. <br/>
 
 2. **Running (1 running)**:  
-   Ini menunjukkan jumlah proses yang **sedang aktif dan dieksekusi oleh CPU**. Dalam contoh ini, hanya ada **1 proses** yang sedang berjalan. Ini berarti hanya satu proses yang sedang menggunakan CPU saat ini.
+   Ini menunjukkan jumlah proses yang **sedang aktif dan dieksekusi oleh CPU**.  <br/>
+Dalam contoh ini, hanya ada **1 proses** yang sedang berjalan. <br/>
+Ini berarti hanya satu proses yang sedang menggunakan CPU saat ini. <br/>
 
 3. **Sleeping (181 sleeping)**:  
-   Proses yang **tidur** atau tidak aktif disebut "sleeping". Ini berarti bahwa 181 proses tidak sedang menggunakan CPU tetapi menunggu untuk melakukan tugas atau menunggu input (misalnya, menunggu data dari disk, menunggu input pengguna, dll). Proses dalam keadaan tidur masih ada di memori, tetapi tidak sedang bekerja aktif di CPU.
+   Proses yang **tidur** atau tidak aktif disebut "sleeping". <br/>
+   Ini berarti bahwa 181 proses tidak sedang menggunakan CPU tetapi menunggu untuk melakukan tugas atau menunggu input (misalnya, menunggu data dari disk, menunggu input pengguna, dll).  <br/>
+Proses dalam keadaan tidur masih ada di memori, tetapi tidak sedang bekerja aktif di CPU. <br/>
 
-4. **Stopped (0 stopped)**:  
-   Proses yang **terhenti** (stopped) berarti proses tersebut sedang tidak aktif karena dihentikan secara manual oleh pengguna atau oleh sistem (misalnya, dengan perintah `kill` atau `stop`). Di sini, tidak ada proses yang dihentikan.
+5. **Stopped (0 stopped)**:  
+   Proses yang **terhenti** (stopped) berarti proses tersebut sedang tidak aktif karena dihentikan secara manual oleh pengguna atau oleh sistem (misalnya, dengan perintah `kill` atau `stop`).  <br/>
+Di sini, tidak ada proses yang dihentikan. <br/>
 
-5. **Zombie (0 zombie)**:  
+6. **Zombie (0 zombie)**:  
    Proses **zombie** adalah proses yang telah selesai dieksekusi tetapi masih memiliki entri di tabel proses karena parent process-nya belum mengambil status akhir proses tersebut. Zombie adalah proses yang tidak lagi aktif tetapi tidak sepenuhnya dibersihkan oleh sistem. Di sini, tidak ada proses zombie, yang berarti sistem berjalan dengan baik tanpa proses yang tertinggal.
 
 
