@@ -1232,4 +1232,4 @@ Dengan memahami angka-angka ini, Anda bisa mendiagnosis **kenapa CPU bekerja lam
 - Kalau **`wa`** tinggi → Ada masalah I/O (disk atau jaringan lambat).  
 - Kalau **`id`** rendah → CPU sedang **sangat sibuk**.
 
-Harapannya penjelasan ini membuatnya **lebih mudah dipahami**! Jika ada bagian yang ingin diperjelas lagi, beri tahu saya. 😊
+
